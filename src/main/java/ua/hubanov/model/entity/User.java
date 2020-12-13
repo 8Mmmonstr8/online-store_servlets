@@ -8,6 +8,8 @@ public class User {
     private String password;
     private UserRole role = UserRole.USER;
     private boolean isNonLocked = true;
+ //TODO add cart
+    //   private Cart cart;
 
     public User() {
     }
