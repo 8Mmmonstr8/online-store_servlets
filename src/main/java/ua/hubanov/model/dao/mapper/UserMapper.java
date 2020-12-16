@@ -2,6 +2,7 @@ package ua.hubanov.model.dao.mapper;
 
 import ua.hubanov.model.entity.Product;
 import ua.hubanov.model.entity.User;
+import ua.hubanov.model.entity.UserRole;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,8 +17,7 @@ public class UserMapper implements ObjectMapper<User> {
         user.setFirstName(rs.getString("first_name"));
         user.setLastName(rs.getString("last_name"));
         user.setPassword(rs.getString("password"));
-    // TODO add roles
-        //    user.setRole(rs.getObject("role"));
+        user.setRole(UserRole.valueOf(rs.getString("role")));
         user.setNonLocked(rs.getBoolean("is_non_locked"));
     // TODO add cart in User then here
         //    user.setCart()

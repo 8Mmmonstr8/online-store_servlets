@@ -2,15 +2,10 @@ package ua.hubanov.model.dao.impl;
 
 import ua.hubanov.exceptions.UserNotFoundException;
 import ua.hubanov.model.dao.UserDao;
-import ua.hubanov.model.dao.mapper.ProductMapper;
 import ua.hubanov.model.dao.mapper.UserMapper;
-import ua.hubanov.model.entity.Product;
 import ua.hubanov.model.entity.User;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +32,8 @@ public class JDBCUserDao implements UserDao {
     public List<User> findAll() {
         Map<Long, User> users = new HashMap<>();
 
+
+        //SELECT * FROM user LEFT JOIN carts ON user.id=carts.user_id;
         final String query = " select * from user";
         try (Statement st = connection.createStatement()) {
             ResultSet rs = st.executeQuery(query);
@@ -77,11 +74,14 @@ public class JDBCUserDao implements UserDao {
                 .findAny().orElseThrow(UserNotFoundException::new);
         return user;
 
+
 //        User user = new User();
 //
-//        final String query = " select * from user where email = '" + email + "'";
-//        try (Statement st = connection.createStatement()) {
-//            ResultSet rs = st.executeQuery(query);
+//        final String query = " select * from user where email = ?";
+//        try (PreparedStatement pst = connection.prepareStatement(query)) {
+//            final String queryString = "\'" + email + "\'";
+//            pst.setString(1, queryString);
+//            ResultSet rs = pst.executeQuery(query);
 //
 //            UserMapper userMapper = new UserMapper();
 //            user = userMapper.extractFromResultSet(rs);

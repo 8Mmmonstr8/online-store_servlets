@@ -1,6 +1,6 @@
 package ua.hubanov.controller;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.mindrot.jbcrypt.BCrypt;
 import ua.hubanov.exceptions.UserNotFoundException;
 import ua.hubanov.model.entity.User;
 import ua.hubanov.model.service.UserService;
@@ -13,8 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class LoginServlet extends HttpServlet {
-    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-    private UserService userService = new UserService();
+    private final UserService userService = new UserService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,7 +40,7 @@ public class LoginServlet extends HttpServlet {
             try {
                 // Найти user в DB.
                 user = userService.findUserByEmail(email);
-                boolean isPasswordValid = bCryptPasswordEncoder.matches(password, user.getPassword());
+                boolean isPasswordValid = BCrypt.checkpw(password, user.getPassword());
 
                 if (!isPasswordValid) {
                     hasError = true;
@@ -54,10 +53,8 @@ public class LoginServlet extends HttpServlet {
         }
 
         if (hasError) {
-            // Сохранить информацию в request attribute перед forward.
+            // Сохранить информацию в request attribute и forward.
             request.setAttribute("errorString", errorString);
-
-            // Forward (перенаправить) к странице /WEB-INF/views/login.jsp
             request.getRequestDispatcher("/WEB-INF/views/login_page.jsp").forward(request, response);
         } else {
             HttpSession session = request.getSession();

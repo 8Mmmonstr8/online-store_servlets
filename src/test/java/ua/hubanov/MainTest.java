@@ -12,8 +12,10 @@ public class MainTest {
 
     @Test
     public void findByEmailTest() throws Exception {
-        User user = userService.findUserByEmail("test@test");
+        User user = userService.findUserByEmail("admin@admin.com");
         System.out.println(user.getId());
+        System.out.println(user.getRole());
+        System.out.println(user.getRole().getClass());
     }
 
     @Test
