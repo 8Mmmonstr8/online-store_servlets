@@ -16,7 +16,7 @@
                 <c:when test="${role == null}">
                     <a href="${pageContext.request.contextPath}/store/">Home</a>
                     <a href="${pageContext.request.contextPath}/store/login">Cart</a>
-                    <a href="${pageContext.request.contextPath}/store/login">Login</a>
+                    <a href="${pageContext.request.contextPath}/store/login">Login/Register</a>
                 </c:when>
                 <c:when test="${role == 'USER'}">
 <%--                    <fmt:message key="common.you_login_as"/> ${sessionScope.username}--%>

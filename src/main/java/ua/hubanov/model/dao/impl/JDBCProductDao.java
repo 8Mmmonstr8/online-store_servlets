@@ -21,8 +21,8 @@ public class JDBCProductDao implements ProductDao {
     }
 
     @Override
-    public void create(Product entity) {
-
+    public boolean create(Product entity) {
+        return false;
     }
 
     @Override

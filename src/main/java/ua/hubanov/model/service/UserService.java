@@ -24,4 +24,9 @@ public class UserService {
         }
     }
 
+    public boolean saveUser(User newUser) {
+        try (UserDao dao = daoFactory.createUserDao()) {
+            return dao.create(newUser);
+        }
+    }
 }
