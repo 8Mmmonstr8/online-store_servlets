@@ -15,7 +15,7 @@
 <p style="color: red;">${errorString}</p>
 
 
-<form method="POST" action="/login">
+<form method="POST" action="/store/login">
     <table border="0">
         <tr>
             <td>Email</td>
@@ -28,7 +28,7 @@
         <tr>
             <td colspan ="2">
                 <input type="submit" value= "Submit" />
-                <a href="/">Cancel</a>
+                <a href="/store/">Cancel</a>
             </td>
         </tr>
     </table>
