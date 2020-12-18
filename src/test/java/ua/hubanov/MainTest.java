@@ -2,7 +2,9 @@ package ua.hubanov;
 
 
 import org.junit.Test;
+import ua.hubanov.model.entity.Cart;
 import ua.hubanov.model.entity.User;
+import ua.hubanov.model.service.CartService;
 import ua.hubanov.model.service.UserService;
 
 import java.util.List;
@@ -22,5 +24,12 @@ public class MainTest {
     public void findAllUsersTest() {
         List<User> users = userService.getAllUsers();
         users.stream().forEach(x -> System.out.println(x.getId()));
+    }
+
+    @Test
+    public void createNewCartTest() {
+        CartService cartService = new CartService();
+        Long cartId = cartService.createNewCart(new Cart());
+        System.out.println(cartId);
     }
 }

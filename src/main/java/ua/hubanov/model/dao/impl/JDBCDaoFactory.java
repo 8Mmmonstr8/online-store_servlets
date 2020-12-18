@@ -1,5 +1,6 @@
 package ua.hubanov.model.dao.impl;
 
+import ua.hubanov.model.dao.CartDao;
 import ua.hubanov.model.dao.DaoFactory;
 import ua.hubanov.model.dao.ProductDao;
 import ua.hubanov.model.dao.UserDao;
@@ -19,6 +20,11 @@ public class JDBCDaoFactory extends DaoFactory {
     @Override
     public UserDao createUserDao() {
         return new JDBCUserDao(getConnection());
+    }
+
+    @Override
+    public CartDao createCartDao() {
+        return new JDBCCartDao(getConnection());
     }
 
     private Connection getConnection(){

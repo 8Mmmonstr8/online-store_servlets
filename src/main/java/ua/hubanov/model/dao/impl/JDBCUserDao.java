@@ -3,7 +3,9 @@ package ua.hubanov.model.dao.impl;
 import ua.hubanov.exceptions.UserNotFoundException;
 import ua.hubanov.model.dao.UserDao;
 import ua.hubanov.model.dao.mapper.UserMapper;
+import ua.hubanov.model.entity.Cart;
 import ua.hubanov.model.entity.User;
+import ua.hubanov.model.service.CartService;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ import java.util.Map;
 
 public class JDBCUserDao implements UserDao {
     private final Connection connection;
+    private final CartService cartService = new CartService();
 
     public JDBCUserDao(Connection connection) {
         this.connection = connection;
@@ -21,8 +24,8 @@ public class JDBCUserDao implements UserDao {
     @Override
     public boolean create(User user) {
         final String sql = "INSERT INTO User " +
-                "(email, first_name, last_name, password, role, is_non_locked) " +
-                "VALUES (?, ?, ?, ?, ?, ?)";
+                "(email, first_name, last_name, password, role, is_non_locked, cart_id) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
  //       final String INSERT_QUERY = "INSERT INTO user VALUES (DEFAULT,?,?,?,?,?,?, DEFAULT)";
 
@@ -33,6 +36,7 @@ public class JDBCUserDao implements UserDao {
             statement.setString(4, user.getPassword());
             statement.setString(5, user.getRole().name());
             statement.setBoolean(6, user.isNonLocked());
+            statement.setLong(7, cartService.createNewCart(new Cart()));
 
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
