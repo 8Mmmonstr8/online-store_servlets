@@ -21,11 +21,6 @@ public class Servlet extends HttpServlet {
         commands.put("", new HomeCommand());
         commands.put("user_home", new UserHomeCommand());
         commands.put("registration", new RegistrationCommand());
-//        commands.put("registration", new Registration());
-//        commands.put("register-user", new RegisterUser(new UserServiceImpl()));
-//        commands.put("exception" , new Exception());
-//        commands.put("locale" , new LocaleChange());
-//        commands.put("display-tours" , new DisplayTours(new TourServiceImpl()));
 //        commands.put("user/personal-account" , new PersonalAccount());
     }
 
