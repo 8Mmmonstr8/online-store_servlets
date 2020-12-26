@@ -14,24 +14,24 @@
         <div style="padding: 5px;">
             <c:choose>
                 <c:when test="${role == null}">
-                    <a href="${pageContext.request.contextPath}/store/">Home</a>
-                    <a href="${pageContext.request.contextPath}/store/login">Cart</a>
-                    <a href="${pageContext.request.contextPath}/store/login">Login/Register</a>
+                    <a href="${pageContext.request.contextPath}/">Home</a>
+                    <a href="${pageContext.request.contextPath}/login">Cart</a>
+                    <a href="${pageContext.request.contextPath}/login">Login/Register</a>
                 </c:when>
                 <c:when test="${role == 'USER'}">
 <%--                    <fmt:message key="common.you_login_as"/> ${sessionScope.username}--%>
-                    <a href="${pageContext.request.contextPath}/store/user_home">Home</a>
-                    <a href="${pageContext.request.contextPath}/store/user_home/cart">Cart</a>
-                    <a href="${pageContext.request.contextPath}/store/logout">Logout</a>
+                    <a href="${pageContext.request.contextPath}/user_home">Home</a>
+                    <a href="${pageContext.request.contextPath}/user_home/cart">Cart</a>
+                    <a href="${pageContext.request.contextPath}/logout">Logout</a>
 <%--                    <a href="${pageContext.request.contextPath}/app/user/personal-account"><fmt:message key="common.personal_account"/></a><br>--%>
 <%--                    <a href="${pageContext.request.contextPath}/app/logout"><fmt:message key="common.logout"/></a><br>--%>
                 </c:when>
                 <c:when test="${role == 'ADMIN'}">
 <%--                    <fmt:message key="common.you_login_as"/> ${sessionScope.username}--%>
-                    <a href="${pageContext.request.contextPath}/store/admin">Admin</a>
-                    <a href="${pageContext.request.contextPath}/store/user_home">Home</a>
-                    <a href="${pageContext.request.contextPath}/store/user_home/cart">Cart</a>
-                    <a href="${pageContext.request.contextPath}/store/logout">Logout</a>
+                    <a href="${pageContext.request.contextPath}/admin">Admin</a>
+                    <a href="${pageContext.request.contextPath}/user_home">Home</a>
+                    <a href="${pageContext.request.contextPath}/user_home/cart">Cart</a>
+                    <a href="${pageContext.request.contextPath}/logout">Logout</a>
 
 <%--                    <a href="${pageContext.request.contextPath}/app/manager/tours-operations"><fmt:message key="common.manager_page"/></a><br>--%>
 <%--                    <a href="${pageContext.request.contextPath}/app/admin/new-tour"><fmt:message key="common.new_tour"/></a><br>--%>

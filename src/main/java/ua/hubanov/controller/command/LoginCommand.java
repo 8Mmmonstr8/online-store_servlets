@@ -51,7 +51,7 @@ public class LoginCommand implements Command {
             session.setAttribute("loggedUser", user);
             session.setAttribute("role", user.getRole().name());
 
-            // Redirect (Перенаправить) на страницу /userInfo.
+            // Redirect на страницу /userInfo.
             return "redirect:/store/user_home";
         }
     }

@@ -28,11 +28,11 @@
         <tr>
             <td colspan ="2">
                 <input type="submit" value= "Submit" />
-                <a href="/store/">Cancel</a>
+                <a href="${pageContext.request.contextPath}/">Cancel</a>
             </td>
         </tr>
         <tr>
-            <a href="/store/registration">Register</a>
+            <a href="${pageContext.request.contextPath}/registration">Register</a>
         </tr>
     </table>
 </form>
