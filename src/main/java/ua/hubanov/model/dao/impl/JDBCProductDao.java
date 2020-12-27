@@ -4,14 +4,8 @@ import ua.hubanov.model.dao.ProductDao;
 import ua.hubanov.model.dao.mapper.ProductMapper;
 import ua.hubanov.model.entity.Product;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.*;
+import java.util.*;
 
 public class JDBCProductDao implements ProductDao {
     private final Connection connection;
@@ -26,15 +20,29 @@ public class JDBCProductDao implements ProductDao {
     }
 
     @Override
-    public Product findById(Long id) {
-        return null;
+    public Optional<Product> findById(Long id) {
+        String sql = "SELECT * FROM products WHERE id = ?";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setLong(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            ProductMapper productMapper = new ProductMapper();
+            if (rs.next()) {
+                Product product = productMapper.extractFromResultSet(rs);
+                return Optional.of(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 
     @Override
     public List<Product> findAll() {
         Map<Long, Product> products = new HashMap<>();
 
-        final String query = " select * from products";
+        final String query = "SELECT * FROM products";
         try (Statement st = connection.createStatement()) {
             ResultSet rs = st.executeQuery(query);
 

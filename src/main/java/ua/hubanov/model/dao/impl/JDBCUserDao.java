@@ -1,5 +1,6 @@
 package ua.hubanov.model.dao.impl;
 
+import ua.hubanov.exceptions.CartNotFoundException;
 import ua.hubanov.exceptions.UserNotFoundException;
 import ua.hubanov.model.dao.UserDao;
 import ua.hubanov.model.dao.mapper.UserMapper;
@@ -8,10 +9,7 @@ import ua.hubanov.model.entity.User;
 import ua.hubanov.model.service.CartService;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class JDBCUserDao implements UserDao {
     private final Connection connection;
@@ -50,8 +48,8 @@ public class JDBCUserDao implements UserDao {
     }
 
     @Override
-    public User findById(Long id) {
-        return null;
+    public Optional<User> findById(Long id) {
+        return Optional.empty();
     }
 
     @Override
@@ -67,7 +65,13 @@ public class JDBCUserDao implements UserDao {
             UserMapper userMapper = new UserMapper();
 
             while (rs.next()) {
-                User user = userMapper.extractFromResultSet(rs);
+                User user = null;
+                try {
+                    user = userMapper.extractFromResultSet(rs);
+                } catch (CartNotFoundException e) {
+                    e.printStackTrace();
+                }
+//                user.setCart(cartService.findById(rs.getLong("cart_id")));
                 user = userMapper.makeUnique(users, user);
             }
             return new ArrayList<>(users.values());

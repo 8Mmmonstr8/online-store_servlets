@@ -9,7 +9,7 @@ public class User {
     private UserRole role = UserRole.USER;
     private boolean isNonLocked = true;
  //TODO add cart
-    //   private Cart cart;
+    private Cart cart;
 
     public User() {
     }
@@ -80,6 +80,14 @@ public class User {
         isNonLocked = nonLocked;
     }
 
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -90,6 +98,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", role=" + role +
                 ", isNonLocked=" + isNonLocked +
+          //      ", cartId=" + cart.getId() +
                 '}';
     }
 }

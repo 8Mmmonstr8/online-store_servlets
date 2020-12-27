@@ -1,10 +1,11 @@
 package ua.hubanov.model.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface GenericDao<T> extends AutoCloseable {
     boolean create (T entity);
-    T findById(Long id);
+    Optional<T> findById(Long id);
     List<T> findAll();
     void update(T entity);
     void delete(Long id);

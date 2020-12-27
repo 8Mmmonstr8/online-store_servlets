@@ -14,6 +14,10 @@ public class Cart {
     public Cart() {
     }
 
+    public Cart(Long id) {
+        this.id = id;
+    }
+
     public Cart(Long id, Set<Product> products, Map<Product, Integer> productsWithQuantity, Set<Order> orders) {
         this.id = id;
         this.products = products;
@@ -51,5 +55,15 @@ public class Cart {
 
     public void setOrders(Set<Order> orders) {
         this.orders = orders;
+    }
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "id=" + id +
+             //   ", products=" + products +
+              //  ", productsWithQuantity=" + productsWithQuantity +
+              //  ", orders=" + orders +
+                '}';
     }
 }

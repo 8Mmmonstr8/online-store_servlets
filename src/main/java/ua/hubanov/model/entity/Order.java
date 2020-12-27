@@ -14,6 +14,10 @@ public class Order {
     public Order() {
     }
 
+    public Order(Long id) {
+        this.id = id;
+    }
+
     public Order(Long id, User user, Date orderDate, Set<OrderedProduct> orderedProducts, boolean isApproved) {
         this.id = id;
         this.user = user;
