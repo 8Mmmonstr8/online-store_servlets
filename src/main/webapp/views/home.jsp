@@ -30,7 +30,7 @@
             <td>${product.price}</td>
             <td>${product.quantity}</td>
             <td>${product.description}</td>
-            <td>${product.category}</td>
+            <td>${product.getCategory().getName()}</td>
             <td>${product.publicationDate}</td>
             <td>
                 <a href="addToCart?id=${product.id}">Add to Cart</a>

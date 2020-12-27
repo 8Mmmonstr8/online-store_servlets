@@ -66,12 +66,8 @@ public class JDBCUserDao implements UserDao {
 
             while (rs.next()) {
                 User user = null;
-                try {
-                    user = userMapper.extractFromResultSet(rs);
-                } catch (CartNotFoundException e) {
-                    e.printStackTrace();
-                }
-//                user.setCart(cartService.findById(rs.getLong("cart_id")));
+                user = userMapper.extractFromResultSet(rs);
+                //                user.setCart(cartService.findById(rs.getLong("cart_id")));
                 user = userMapper.makeUnique(users, user);
             }
             return new ArrayList<>(users.values());

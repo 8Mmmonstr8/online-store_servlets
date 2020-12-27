@@ -1,6 +1,7 @@
 package ua.hubanov.model.dao.impl;
 
 import ua.hubanov.model.dao.ProductDao;
+import ua.hubanov.model.dao.mapper.CategoryMapper;
 import ua.hubanov.model.dao.mapper.ProductMapper;
 import ua.hubanov.model.entity.Product;
 
@@ -8,6 +9,7 @@ import java.sql.*;
 import java.util.*;
 
 public class JDBCProductDao implements ProductDao {
+    CategoryMapper categoryMapper = new CategoryMapper();
     private final Connection connection;
 
     public JDBCProductDao(Connection connection) {
@@ -21,7 +23,8 @@ public class JDBCProductDao implements ProductDao {
 
     @Override
     public Optional<Product> findById(Long id) {
-        String sql = "SELECT * FROM products WHERE id = ?";
+        String sql = "SELECT * FROM products INNER JOIN categories ON products.category_id = categories.id " +
+                "WHERE products.id = ?";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setLong(1, id);
@@ -30,6 +33,7 @@ public class JDBCProductDao implements ProductDao {
             ProductMapper productMapper = new ProductMapper();
             if (rs.next()) {
                 Product product = productMapper.extractFromResultSet(rs);
+                product.setCategory(categoryMapper.extractFromResultSet(rs));
                 return Optional.of(product);
             }
         } catch (SQLException e) {
@@ -42,7 +46,7 @@ public class JDBCProductDao implements ProductDao {
     public List<Product> findAll() {
         Map<Long, Product> products = new HashMap<>();
 
-        final String query = "SELECT * FROM products";
+        final String query = "SELECT * FROM products INNER JOIN categories ON products.category_id = categories.id ";
         try (Statement st = connection.createStatement()) {
             ResultSet rs = st.executeQuery(query);
 
@@ -50,6 +54,7 @@ public class JDBCProductDao implements ProductDao {
 
             while (rs.next()) {
                 Product product = productMapper.extractFromResultSet(rs);
+                product.setCategory(categoryMapper.extractFromResultSet(rs));
                 product = productMapper.makeUnique(products, product);
             }
             return new ArrayList<>(products.values());

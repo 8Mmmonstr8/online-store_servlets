@@ -55,11 +55,11 @@ public class CartService {
     }
 
     public Set<OrderedProduct> getAllApprovedOrderedProductsOfUser(Set<OrderedProduct> orderedProducts) {
-        return orderedProducts.stream().filter(x -> !x.getOrder().isApproved()).collect(Collectors.toSet());
+        return orderedProducts.stream().filter(x -> x.getOrder().isApproved()).collect(Collectors.toSet());
     }
 
     public Set<OrderedProduct> getAllNotApprovedOrderedProductsOfUser(Set<OrderedProduct> orderedProducts) {
-        return orderedProducts.stream().filter(x -> x.getOrder().isApproved()).collect(Collectors.toSet());
+        return orderedProducts.stream().filter(x -> !x.getOrder().isApproved()).collect(Collectors.toSet());
     }
 
     public Set<OrderedProduct> getAllOrderedProductsOfUser(User user) {

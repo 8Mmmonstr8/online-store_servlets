@@ -16,7 +16,7 @@ public class UserMapper implements ObjectMapper<User> {
 
 
     @Override
-    public User extractFromResultSet(ResultSet rs) throws SQLException, CartNotFoundException {
+    public User extractFromResultSet(ResultSet rs) throws SQLException {
         User user = new User();
         user.setId(rs.getLong("id"));
         user.setEmail(rs.getString("email"));

@@ -19,6 +19,24 @@ import java.util.Set;
 
 public class MainTest {
     UserService userService = new UserService();
+    ProductService productService = new ProductService();
+
+    @Test
+    public void findProductById() {
+        Product product = new Product();
+        try {
+            product = productService.findById(4L);
+        } catch (ProductNotFoundException e) {
+            e.printStackTrace();
+        }
+        System.out.println(product.getName() + product.getCategory().getName());
+    }
+
+    @Test
+    public void findAllProducts() {
+        List<Product> products = productService.getAllProducts();
+        products.forEach(x -> System.out.println(x.getName() + " " + x.getCategory().getName()));
+    }
 
     @Test
     public void findByEmailTest() throws Exception {
@@ -77,7 +95,8 @@ public class MainTest {
         User user = userService.findUserByEmail("test5@test5");
 
         Set<OrderedProduct> orderedProducts = cartService.getAllOrderedProductsOfUser(user);
-        orderedProducts.forEach(x -> System.out.println(x.getId()));
+        orderedProducts.forEach(x -> System.out.println(x.getId() + " " + x.getCategory().getName() + " "
+                            + x.getOrder().getOrderDate() + " " + x.getOrder().isApproved()));
     }
 
     @Test

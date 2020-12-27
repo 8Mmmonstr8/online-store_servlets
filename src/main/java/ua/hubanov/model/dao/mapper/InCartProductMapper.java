@@ -15,11 +15,15 @@ public class InCartProductMapper implements ObjectMapper<InCartProduct> {
     ProductService productService = new ProductService();
 
     @Override
-    public InCartProduct extractFromResultSet(ResultSet rs) throws SQLException, ProductNotFoundException, CartNotFoundException {
+    public InCartProduct extractFromResultSet(ResultSet rs) throws SQLException {
         InCartProduct inCartProduct = new InCartProduct();
         inCartProduct.setId(rs.getLong("id"));
-        inCartProduct.setCart(cartService.findById(rs.getLong("cart_id")));
-        inCartProduct.setProduct(productService.findById(rs.getLong("product_id")));
+        try {
+            inCartProduct.setCart(cartService.findById(rs.getLong("cart_id")));
+            inCartProduct.setProduct(productService.findById(rs.getLong("product_id")));
+        } catch (CartNotFoundException | ProductNotFoundException e) {
+            e.printStackTrace();
+        }
         inCartProduct.setNeededQuantity(rs.getInt("needed_quantity"));
         return inCartProduct;
     }

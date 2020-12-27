@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.Map;
 
 public interface ObjectMapper<T> {
-    T extractFromResultSet(ResultSet rs) throws SQLException, ProductNotFoundException, CartNotFoundException;
+    T extractFromResultSet(ResultSet rs) throws SQLException;
 
     T makeUnique(Map<Long, T> cache, T entity);
 }

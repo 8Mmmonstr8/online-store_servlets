@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class OrderedProductMapper implements ObjectMapper<OrderedProduct> {
     @Override
-    public OrderedProduct extractFromResultSet(ResultSet rs) throws SQLException, ProductNotFoundException, CartNotFoundException {
+    public OrderedProduct extractFromResultSet(ResultSet rs) throws SQLException {
         OrderedProduct orderedProduct = new OrderedProduct();
         orderedProduct.setId(rs.getLong("id"));
         orderedProduct.setDescription(rs.getString("description"));
@@ -19,7 +19,7 @@ public class OrderedProductMapper implements ObjectMapper<OrderedProduct> {
         orderedProduct.setPrice(rs.getBigDecimal("price"));
         orderedProduct.setQuantity(rs.getInt("quantity"));
 //        orderedProduct.setCategory();
-        orderedProduct.setOrder(new Order(rs.getLong("order_id")));
+//        orderedProduct.setOrder(new Order(rs.getLong("order_id")));
         return orderedProduct;
     }
 

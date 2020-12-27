@@ -9,6 +9,7 @@ public class Order {
     private User user;
     private Date orderDate;
     private Set<OrderedProduct> orderedProducts;
+    private Cart cart;
     private boolean isApproved;
 
     public Order() {
@@ -18,12 +19,13 @@ public class Order {
         this.id = id;
     }
 
-    public Order(Long id, User user, Date orderDate, Set<OrderedProduct> orderedProducts, boolean isApproved) {
+    public Order(Long id, User user, Date orderDate, Set<OrderedProduct> orderedProducts, Cart cart, boolean isApproved) {
         this.id = id;
         this.user = user;
         this.orderDate = orderDate;
         this.orderedProducts = orderedProducts;
         this.isApproved = isApproved;
+        this.cart = cart;
     }
 
     public Long getId() {
@@ -64,5 +66,13 @@ public class Order {
 
     public void setApproved(boolean approved) {
         isApproved = approved;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 }

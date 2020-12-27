@@ -3,8 +3,10 @@ package ua.hubanov.model.dao.impl;
 import ua.hubanov.exceptions.CartNotFoundException;
 import ua.hubanov.exceptions.ProductNotFoundException;
 import ua.hubanov.model.dao.CartDao;
+import ua.hubanov.model.dao.mapper.CategoryMapper;
 import ua.hubanov.model.dao.mapper.InCartProductMapper;
 import ua.hubanov.model.dao.mapper.OrderedProductMapper;
+import ua.hubanov.model.dao.mapper.OrdersMapper;
 import ua.hubanov.model.entity.*;
 
 import java.sql.*;
@@ -12,6 +14,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class JDBCCartDao implements CartDao {
+    CategoryMapper categoryMapper = new CategoryMapper();
+    OrdersMapper ordersMapper = new OrdersMapper();
     private final Connection connection;
 
     public JDBCCartDao(Connection connection) {
@@ -111,7 +115,10 @@ public class JDBCCartDao implements CartDao {
         Map<Long, OrderedProduct> orderedProducts = new HashMap<>();
 
 
-        String sql = "SELECT op.* FROM carts c, orders o, ordered_products op WHERE c.id = ? AND o.cart_id = c.id AND op.order_id = o.id";
+        String sql = "SELECT op.*, orders.*, categories.* FROM carts c, orders o, ordered_products op " +
+                "INNER JOIN orders ON op.order_id = orders.id " +
+                "INNER JOIN categories ON op.category_id = categories.id " +
+                "WHERE c.id = ? AND o.cart_id = c.id AND op.order_id = o.id";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setLong(1, user.getCart().getId());
@@ -120,6 +127,8 @@ public class JDBCCartDao implements CartDao {
             OrderedProductMapper orderedProductMapper = new OrderedProductMapper();
             while (rs.next()) {
                 OrderedProduct orderedProduct = orderedProductMapper.extractFromResultSet(rs);
+                orderedProduct.setOrder(ordersMapper.extractFromResultSet(rs));
+                orderedProduct.setCategory(categoryMapper.extractFromResultSet(rs));
                 orderedProduct = orderedProductMapper.makeUnique(orderedProducts, orderedProduct);
             }
             return new HashSet<>(orderedProducts.values());
