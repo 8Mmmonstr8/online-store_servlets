@@ -17,91 +17,101 @@
 <jsp:include page="../blocks/header.jsp"></jsp:include>
 
 
-<h3>Cart</h3>
+<h1 align="center">Cart</h1>
 
-<table border="1">
-    <tr>
-        <th>Name</th>
-        <th>Category</th>
-        <th>Description</th>
-        <th>Pub Date</th>
-        <th>Available Quantity</th>
-        <th>Price</th>
-        <th>Needed Quantity</th>
-        <th>Action</th>
-    </tr>
-    <c:forEach items="${products}" var="product" >
+<div align="center">
+    <table border="1" cellpadding="5">
+        <caption><h2>Products in cart</h2></caption>
         <tr>
-            <td>${product.getKey().getName()}</td>
-            <td>${product.getKey().getCategory().getName()}</td>
-            <td>${product.getKey().getDescription()}</td>
-            <td>${product.getKey().getPublicationDate()}</td>
-            <td>${product.getKey().getQuantity()}</td>
-            <td>${product.getKey().getPrice()}</td>
-            <td>${product.getValue()}</td>
-            <td>
-<%--                <a href="addToCart?id=${product.id}">Add to Cart</a>--%>
-            </td>
-
+            <th>Name</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Pub Date</th>
+            <th>Available Quantity</th>
+            <th>Price</th>
+            <th>Needed Quantity</th>
+            <th>Action</th>
         </tr>
-    </c:forEach>
-</table>
+        <c:forEach items="${products}" var="product" >
+            <tr>
+                <td>${product.getKey().getName()}</td>
+                <td>${product.getKey().getCategory().getName()}</td>
+                <td>${product.getKey().getDescription()}</td>
+                <td>${product.getKey().getPublicationDate()}</td>
+                <td>${product.getKey().getQuantity()}</td>
+                <td>${product.getKey().getPrice()}</td>
+                <td>${product.getValue()}</td>
+                <td>
+    <%--                <a href="addToCart?id=${product.id}">Add to Cart</a>--%>
+                </td>
+
+            </tr>
+        </c:forEach>
+    </table>
+    <p align="center"><b>Total sum: ${totalPrice}</b></p>
+</div>
 
 <br/>
 
-<table border="1">
-    <tr>
-        <th>Name</th>
-        <th>Quantity</th>
-        <th>Price</th>
-        <th>Category</th>
-        <th>Description</th>
-        <th>Order Id</th>
-        <th>Order Date</th>
-        <th>Is Order Approved</th>
-
-    </tr>
-    <c:forEach items="${notApprovedOrderedProducts}" var="notApprovedOrderedProduct" >
+<div align="center">
+    <table border="1" cellpadding="5">
+        <caption><h2>Waiting for approval</h2></caption>
         <tr>
-            <td>${notApprovedOrderedProduct.getName()}</td>
-            <td>${notApprovedOrderedProduct.getQuantity()}</td>
-            <td>${notApprovedOrderedProduct.getPrice()}</td>
-            <td>${notApprovedOrderedProduct.getCategory().getName()}</td>
-            <td>${notApprovedOrderedProduct.getDescription()}</td>
-            <td>${notApprovedOrderedProduct.getOrder().getId()}</td>
-            <td>${notApprovedOrderedProduct.getOrder().getOrderDate()}</td>
-            <td>${notApprovedOrderedProduct.getOrder().isApproved()}</td>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Order Id</th>
+            <th>Order Date</th>
+            <th>Is Order Approved</th>
+
         </tr>
-    </c:forEach>
-</table>
+        <c:forEach items="${notApprovedOrderedProducts}" var="notApprovedOrderedProduct" >
+            <tr>
+                <td>${notApprovedOrderedProduct.getName()}</td>
+                <td>${notApprovedOrderedProduct.getQuantity()}</td>
+                <td>${notApprovedOrderedProduct.getPrice()}</td>
+                <td>${notApprovedOrderedProduct.getCategory().getName()}</td>
+                <td>${notApprovedOrderedProduct.getDescription()}</td>
+                <td>${notApprovedOrderedProduct.getOrder().getId()}</td>
+                <td>${notApprovedOrderedProduct.getOrder().getOrderDate()}</td>
+                <td>${notApprovedOrderedProduct.getOrder().isApproved()}</td>
+            </tr>
+        </c:forEach>
+    </table>
+</div>
 
 <br/>
 
-<table border="1">
-    <tr>
-        <th>Name</th>
-        <th>Quantity</th>
-        <th>Price</th>
-        <th>Category</th>
-        <th>Description</th>
-        <th>Order Id</th>
-        <th>Order Date</th>
-        <th>Is Order Approved</th>
-
-    </tr>
-    <c:forEach items="${approvedOrderedProducts}" var="approvedOrderedProduct" >
+<div align="center">
+    <table border="1" cellpadding="5">
+        <caption><h2>Ordered products</h2></caption>
         <tr>
-            <td>${approvedOrderedProduct.getName()}</td>
-            <td>${approvedOrderedProduct.getQuantity()}</td>
-            <td>${approvedOrderedProduct.getPrice()}</td>
-            <td>${approvedOrderedProduct.getCategory().getName()}</td>
-            <td>${approvedOrderedProduct.getDescription()}</td>
-            <td>${approvedOrderedProduct.getOrder().getId()}</td>
-            <td>${approvedOrderedProduct.getOrder().getOrderDate()}</td>
-            <td>${approvedOrderedProduct.getOrder().isApproved()}</td>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Order Id</th>
+            <th>Order Date</th>
+            <th>Is Order Approved</th>
+
         </tr>
-    </c:forEach>
-</table>
+        <c:forEach items="${approvedOrderedProducts}" var="approvedOrderedProduct" >
+            <tr>
+                <td>${approvedOrderedProduct.getName()}</td>
+                <td>${approvedOrderedProduct.getQuantity()}</td>
+                <td>${approvedOrderedProduct.getPrice()}</td>
+                <td>${approvedOrderedProduct.getCategory().getName()}</td>
+                <td>${approvedOrderedProduct.getDescription()}</td>
+                <td>${approvedOrderedProduct.getOrder().getId()}</td>
+                <td>${approvedOrderedProduct.getOrder().getOrderDate()}</td>
+                <td>${approvedOrderedProduct.getOrder().isApproved()}</td>
+            </tr>
+        </c:forEach>
+    </table>
+</div>
 
 
 

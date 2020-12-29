@@ -107,4 +107,13 @@ public class MainTest {
         orderedProducts.forEach(x -> System.out.println(x.getId()));
     }
 
+    @Test
+    public void getTotalSumTest() {
+        CartService cartService = new CartService();
+        User user = userService.findUserByEmail("test5@test5");
+
+        Map<Product, Integer> inCartProducts = cartService.getAllProductsInCart(user);
+        System.out.println(cartService.getTotal(inCartProducts));
+    }
+
 }
