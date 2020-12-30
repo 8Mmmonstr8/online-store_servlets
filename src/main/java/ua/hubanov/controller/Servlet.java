@@ -5,7 +5,8 @@ import ua.hubanov.controller.command.admin.AdminHomeCommand;
 import ua.hubanov.controller.command.admin.CancelOrderCommand;
 import ua.hubanov.controller.command.admin.OrderDetailsCommand;
 import ua.hubanov.controller.command.admin.OrdersManagerCommand;
-import ua.hubanov.model.entity.User;
+import ua.hubanov.controller.command.user.UserCartCommand;
+import ua.hubanov.controller.command.user.UserHomeCommand;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

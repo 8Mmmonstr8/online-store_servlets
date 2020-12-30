@@ -1,5 +1,6 @@
-package ua.hubanov.controller.command;
+package ua.hubanov.controller.command.user;
 
+import ua.hubanov.controller.command.Command;
 import ua.hubanov.model.entity.OrderedProduct;
 import ua.hubanov.model.entity.Product;
 import ua.hubanov.model.entity.User;
