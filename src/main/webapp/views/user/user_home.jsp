@@ -41,7 +41,7 @@ User Role: <b>${role}</b>
             <td>${product.getCategory().getName()}</td>
             <td>${product.publicationDate}</td>
             <td>
-                <a href="addToCart?id=${product.id}">Add to Cart</a>
+                <a href="${pageContext.request.contextPath}/user_home/addToCart?productId=${product.id}">Add to Cart</a>
             </td>
                 <%--                    <td>--%>
                 <%--                        <a href="deleteProduct?code=${product.code}">Delete</a>--%>

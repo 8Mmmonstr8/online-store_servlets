@@ -103,8 +103,8 @@ public class MainTest {
     public void getAllApprovedOrderedProductsOfUserTest() {
         CartService cartService = new CartService();
         User user = userService.findUserByEmail("test5@test5");
-        Set<OrderedProduct> orderedProducts = cartService.getAllApprovedOrderedProductsOfUser(cartService.getAllOrderedProductsOfUser(user));
-        orderedProducts.forEach(x -> System.out.println(x.getId()));
+        List<OrderedProduct> orderedProducts = cartService.getAllApprovedOrderedProductsOfUser(cartService.getAllOrderedProductsOfUser(user));
+        orderedProducts.forEach(x -> System.out.println(x.getId() + " " + x.getOrder().getId()));
     }
 
     @Test

@@ -1,7 +1,9 @@
 package ua.hubanov.model.dao.impl;
 
+import ua.hubanov.exceptions.AlreadyInCartException;
 import ua.hubanov.exceptions.CartNotFoundException;
 import ua.hubanov.exceptions.ProductNotFoundException;
+import ua.hubanov.exceptions.StockQuantityIsNotEnoughException;
 import ua.hubanov.model.dao.CartDao;
 import ua.hubanov.model.dao.mapper.CategoryMapper;
 import ua.hubanov.model.dao.mapper.InCartProductMapper;
@@ -142,5 +144,38 @@ public class JDBCCartDao implements CartDao {
             return null;
         }
     }
+
+    @Override
+    public void addProductToCartByCartIdAndProductId(Long cartId, Long productId) throws StockQuantityIsNotEnoughException, AlreadyInCartException {
+        String sql1 = "SELECT quantity FROM products WHERE id = ?";
+        String sql2 = "SELECT product_id FROM in_cart_product WHERE cart_id = ?";
+        String sql3 = "INSERT INTO in_cart_product (cart_id, product_id, needed_quantity) " +
+                "values (?, ?, 1)";
+
+        try (PreparedStatement ps1 = connection.prepareStatement(sql1);
+             PreparedStatement ps2 = connection.prepareStatement(sql2);
+             PreparedStatement ps3 = connection.prepareStatement(sql3)) {
+            ps1.setLong(1, productId);
+            ps2.setLong(1, cartId);
+            ps3.setLong(1, cartId);
+            ps3.setLong(2, productId);
+
+            ResultSet rs = ps1.executeQuery();
+            rs.next();
+            if (rs.getInt("quantity") < 1) {
+                throw new StockQuantityIsNotEnoughException();
+            }
+            ResultSet rs2 = ps2.executeQuery();
+            while (rs2.next()) {
+                if (rs2.getLong("product_id") == productId) {
+                    throw new AlreadyInCartException();
+                }
+            }
+            ps3.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 

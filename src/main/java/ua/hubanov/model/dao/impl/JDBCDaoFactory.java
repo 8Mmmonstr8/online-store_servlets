@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class JDBCDaoFactory extends DaoFactory {
-    private DataSource dataSource = ConnectionPoolHolder.getDataSource();
+    private final DataSource dataSource = ConnectionPoolHolder.getDataSource();
 
     @Override
     public ProductDao createProductDao() {
