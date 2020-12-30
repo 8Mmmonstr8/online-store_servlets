@@ -4,7 +4,6 @@ import ua.hubanov.exceptions.CartNotFoundException;
 import ua.hubanov.exceptions.ProductNotFoundException;
 import ua.hubanov.model.dao.CartDao;
 import ua.hubanov.model.dao.DaoFactory;
-import ua.hubanov.model.dao.UserDao;
 import ua.hubanov.model.entity.*;
 
 import java.math.BigDecimal;
@@ -30,19 +29,14 @@ public class CartService {
     }
 
     public Map<Product, Integer> getAllProductsInCart(User user) {
+        //TODO DELETE SOUT
+        System.out.println("Execute CartService getAllProductsInCart()");
         try (CartDao dao = daoFactory.createCartDao()) {
-
             try {
                 return dao.findAllProductsInCart(user.getCart());
-            } catch (ProductNotFoundException e) {
-                e.printStackTrace();
-            } catch (CartNotFoundException e) {
+            } catch (ProductNotFoundException | CartNotFoundException e) {
                 e.printStackTrace();
             }
-
-//                    .stream()
-//                    .collect(Collectors.toMap(inCartProduct -> inCartProduct.getProduct(),
-//                            productQuantity -> productQuantity.getNeededQuantity()));
         }
         return null;
     }
@@ -65,12 +59,8 @@ public class CartService {
     public Set<OrderedProduct> getAllOrderedProductsOfUser(User user) {
         try (CartDao dao = daoFactory.createCartDao()) {
             return dao.getAllOrderedProductsOfUser(user);
-        } catch (ProductNotFoundException e) {
+        } catch (ProductNotFoundException | CartNotFoundException | SQLException e) {
             e.printStackTrace();
-        } catch (CartNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
         return null;
     }

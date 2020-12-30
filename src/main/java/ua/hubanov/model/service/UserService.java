@@ -2,9 +2,7 @@ package ua.hubanov.model.service;
 
 import ua.hubanov.exceptions.UserNotFoundException;
 import ua.hubanov.model.dao.DaoFactory;
-import ua.hubanov.model.dao.ProductDao;
 import ua.hubanov.model.dao.UserDao;
-import ua.hubanov.model.entity.Product;
 import ua.hubanov.model.entity.User;
 
 import java.util.List;

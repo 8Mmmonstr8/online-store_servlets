@@ -1,6 +1,5 @@
 package ua.hubanov.model.dao.impl;
 
-//import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import javax.sql.DataSource;
@@ -20,6 +19,7 @@ public class ConnectionPoolHolder {
                     ds.setMinIdle(5);
                     ds.setMaxIdle(10);
                     ds.setMaxOpenPreparedStatements(100);
+
                     dataSource = ds;
                 }
             }

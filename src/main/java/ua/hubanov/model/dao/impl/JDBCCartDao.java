@@ -88,6 +88,7 @@ public class JDBCCartDao implements CartDao {
         String sql = "SELECT * FROM in_cart_product WHERE cart_id = ?";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            connection.setAutoCommit(true);
             ps.setLong(1, cart.getId());
             ResultSet rs = ps.executeQuery();
 
@@ -107,7 +108,11 @@ public class JDBCCartDao implements CartDao {
 
     @Override
     public void close() {
-
+        try{
+            connection.close();
+        }catch(SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

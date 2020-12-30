@@ -27,6 +27,7 @@ public class JDBCProductDao implements ProductDao {
                 "WHERE products.id = ?";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            connection.setAutoCommit(true);
             ps.setLong(1, id);
             ResultSet rs = ps.executeQuery();
 
@@ -48,6 +49,7 @@ public class JDBCProductDao implements ProductDao {
 
         final String query = "SELECT * FROM products INNER JOIN categories ON products.category_id = categories.id ";
         try (Statement st = connection.createStatement()) {
+            connection.setAutoCommit(true);
             ResultSet rs = st.executeQuery(query);
 
             ProductMapper productMapper = new ProductMapper();
@@ -76,6 +78,10 @@ public class JDBCProductDao implements ProductDao {
 
     @Override
     public void close() {
-
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

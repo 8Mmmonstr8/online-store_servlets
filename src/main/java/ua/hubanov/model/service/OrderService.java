@@ -2,11 +2,9 @@ package ua.hubanov.model.service;
 
 import ua.hubanov.model.entity.Order;
 import ua.hubanov.model.entity.OrderedProduct;
-import ua.hubanov.model.entity.Product;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 public interface OrderService {
     List<Order> getAllOrders();
