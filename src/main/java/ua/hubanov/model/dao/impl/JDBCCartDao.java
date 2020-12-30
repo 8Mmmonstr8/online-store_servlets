@@ -6,7 +6,7 @@ import ua.hubanov.model.dao.CartDao;
 import ua.hubanov.model.dao.mapper.CategoryMapper;
 import ua.hubanov.model.dao.mapper.InCartProductMapper;
 import ua.hubanov.model.dao.mapper.OrderedProductMapper;
-import ua.hubanov.model.dao.mapper.OrdersMapper;
+import ua.hubanov.model.dao.mapper.OrderMapper;
 import ua.hubanov.model.entity.*;
 
 import java.sql.*;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class JDBCCartDao implements CartDao {
     CategoryMapper categoryMapper = new CategoryMapper();
-    OrdersMapper ordersMapper = new OrdersMapper();
+    OrderMapper orderMapper = new OrderMapper();
     private final Connection connection;
 
     public JDBCCartDao(Connection connection) {
@@ -127,7 +127,7 @@ public class JDBCCartDao implements CartDao {
             OrderedProductMapper orderedProductMapper = new OrderedProductMapper();
             while (rs.next()) {
                 OrderedProduct orderedProduct = orderedProductMapper.extractFromResultSet(rs);
-                orderedProduct.setOrder(ordersMapper.extractFromResultSet(rs));
+                orderedProduct.setOrder(orderMapper.extractFromResultSet(rs));
                 orderedProduct.setCategory(categoryMapper.extractFromResultSet(rs));
                 orderedProduct = orderedProductMapper.makeUnique(orderedProducts, orderedProduct);
             }

@@ -28,7 +28,7 @@
                 </c:when>
                 <c:when test="${role == 'ADMIN'}">
 <%--                    <fmt:message key="common.you_login_as"/> ${sessionScope.username}--%>
-                    <a href="${pageContext.request.contextPath}/admin">Admin</a>
+                    <a href="${pageContext.request.contextPath}/admin_home">Admin</a>
                     <a href="${pageContext.request.contextPath}/user_home">Home</a>
                     <a href="${pageContext.request.contextPath}/user_home/cart">Cart</a>
                     <a href="${pageContext.request.contextPath}/logout">Logout</a>

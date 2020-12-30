@@ -1,9 +1,6 @@
 package ua.hubanov.model.dao.impl;
 
-import ua.hubanov.model.dao.CartDao;
-import ua.hubanov.model.dao.DaoFactory;
-import ua.hubanov.model.dao.ProductDao;
-import ua.hubanov.model.dao.UserDao;
+import ua.hubanov.model.dao.*;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -25,6 +22,11 @@ public class JDBCDaoFactory extends DaoFactory {
     @Override
     public CartDao createCartDao() {
         return new JDBCCartDao(getConnection());
+    }
+
+    @Override
+    public OrderDao createOrderDao() {
+        return new JDBCOrderDao(getConnection());
     }
 
     private Connection getConnection(){
