@@ -90,4 +90,10 @@ public class CartService {
             dao.deleteProductFromCart(user.getCart().getId(), productId);
         }
     }
+
+    public void checkOut(User user) {
+        try (CartDao dao = daoFactory.createCartDao()) {
+            dao.checkOut(user.getId(), user.getCart().getId());
+        }
+    }
 }

@@ -12,6 +12,8 @@ import ua.hubanov.model.dao.mapper.OrderMapper;
 import ua.hubanov.model.entity.*;
 
 import java.sql.*;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -210,6 +212,54 @@ public class JDBCCartDao implements CartDao {
 
             ps1.execute();
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // TODO add checking for product stock quantity
+    @Override
+    public void checkOut(Long userId, Long cartId) {
+        String sql = "START TRANSACTION";
+        String sql1 = "INSERT INTO orders (date, user_id, cart_id, is_approved) values (now(), ?, ?, ?)";
+        String sql2 = "INSERT INTO ordered_products (description, name, price, quantity, category_id, product_id) " +
+                "SELECT p.description, p.name, p.price, ip.needed_quantity, p.category_id, p.id " +
+                "FROM products p, in_cart_product ip WHERE ip.cart_id = ? AND p.id = ip.product_id";
+        String sql3 = "UPDATE ordered_products SET order_id = ? WHERE order_id IS NULL";
+        String sql4 = "DELETE FROM in_cart_product WHERE cart_id = ?";
+        String sql5 = "COMMIT";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql);
+             PreparedStatement ps1 = connection.prepareStatement(sql1, Statement.RETURN_GENERATED_KEYS);
+             PreparedStatement ps2 = connection.prepareStatement(sql2);
+             PreparedStatement ps3 = connection.prepareStatement(sql3);
+             PreparedStatement ps4 = connection.prepareStatement(sql4);
+             PreparedStatement ps5 = connection.prepareStatement(sql5)) {
+            connection.setAutoCommit(false);
+
+            ps1.setLong(1, userId);
+            ps1.setLong(2, cartId);
+            ps1.setBoolean(3, Boolean.FALSE);
+
+            ps.execute();
+            ps1.executeUpdate();
+            ResultSet rs1 = ps1.getGeneratedKeys();
+            rs1.next();
+            Long orderId = rs1.getLong(1);
+
+            ps2.setLong(1, cartId);
+            ps3.setLong(1, orderId);
+            ps4.setLong(1, cartId);
+
+            ps2.execute();
+            ps3.execute();
+            ps4.execute();
+            ps5.execute();
+        } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException throwable) {
+                throwable.printStackTrace();
+            }
             e.printStackTrace();
         }
     }

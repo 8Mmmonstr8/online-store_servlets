@@ -63,6 +63,7 @@
         </c:forEach>
     </table>
     <p align="center"><b>Total sum: ${totalPrice}</b></p>
+    <a href="${pageContext.request.contextPath}/user_home/cart/checkout">Checkout</a>
 </div>
 
 <br/>

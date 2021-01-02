@@ -38,4 +38,11 @@ public class CartServiceTests {
 
         cartService.deleteProductFromCart(user, 3L);
     }
+
+    @Test
+    public void checkOutTest() {
+        User user = userService.findUserByEmail("test5@test5");
+
+        cartService.checkOut(user);
+    }
 }

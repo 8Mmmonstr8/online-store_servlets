@@ -13,6 +13,7 @@ import ua.hubanov.model.service.CartService;
 import ua.hubanov.model.service.ProductService;
 import ua.hubanov.model.service.UserService;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -115,5 +116,4 @@ public class MainTest {
         Map<Product, Integer> inCartProducts = cartService.getAllProductsInCart(user);
         System.out.println(cartService.getTotal(inCartProducts));
     }
-
 }

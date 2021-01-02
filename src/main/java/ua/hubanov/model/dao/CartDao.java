@@ -26,5 +26,7 @@ public interface CartDao extends GenericDao<Cart> {
     void updateNeededQuantity(Long cartId, Long productId, Integer neededQuantity) throws StockQuantityIsNotEnoughException;
 
     void deleteProductFromCart(Long cartId, Long productId);
+
+    void checkOut(Long userId, Long cartId);
 }
 
