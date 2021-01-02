@@ -20,4 +20,22 @@ public class CartServiceTests {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void updateNeededQuantityTest() {
+        User user = userService.findUserByEmail("test5@test5");
+
+        try {
+            cartService.updateNeededQuantity(user, 3L, 134);
+        } catch (StockQuantityIsNotEnoughException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void deleteProductFromCartTest() {
+        User user = userService.findUserByEmail("test5@test5");
+
+        cartService.deleteProductFromCart(user, 3L);
+    }
 }

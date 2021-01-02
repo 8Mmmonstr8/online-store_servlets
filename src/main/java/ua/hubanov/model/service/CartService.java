@@ -78,4 +78,16 @@ public class CartService {
             dao.addProductToCartByCartIdAndProductId(user.getCart().getId(), productId);
         }
     }
+
+    public void updateNeededQuantity(User user, Long productId, Integer neededQuantity) throws StockQuantityIsNotEnoughException {
+        try (CartDao dao = daoFactory.createCartDao()) {
+            dao.updateNeededQuantity(user.getCart().getId(), productId, neededQuantity);
+        }
+    }
+
+    public void deleteProductFromCart(User user, Long productId) {
+        try (CartDao dao = daoFactory.createCartDao()) {
+            dao.deleteProductFromCart(user.getCart().getId(), productId);
+        }
+    }
 }

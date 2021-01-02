@@ -177,5 +177,41 @@ public class JDBCCartDao implements CartDao {
         }
     }
 
+    @Override
+    public void updateNeededQuantity(Long cartId, Long productId, Integer neededQuantity) throws StockQuantityIsNotEnoughException {
+        String sql1 = "SELECT quantity FROM products WHERE id = ?";
+        String sql2 = "UPDATE in_cart_product SET needed_quantity = ? WHERE cart_id = ? AND product_id = ?";
+
+        try (PreparedStatement ps1 = connection.prepareStatement(sql1);
+             PreparedStatement ps2 = connection.prepareStatement(sql2)) {
+            ps1.setLong(1, productId);
+            ps2.setLong(1, neededQuantity);
+            ps2.setLong(2, cartId);
+            ps2.setLong(3, productId);
+
+            ResultSet rs = ps1.executeQuery();
+            rs.next();
+            if (rs.getInt("quantity") < neededQuantity) {
+                throw new StockQuantityIsNotEnoughException();
+            }
+            ps2.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteProductFromCart(Long cartId, Long productId) {
+        String sql1 = "DELETE FROM in_cart_product WHERE cart_id = ? AND product_id = ?";
+
+        try (PreparedStatement ps1 = connection.prepareStatement(sql1)) {
+            ps1.setLong(1, cartId);
+            ps1.setLong(2, productId);
+
+            ps1.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
 

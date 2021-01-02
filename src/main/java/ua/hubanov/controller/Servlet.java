@@ -6,6 +6,7 @@ import ua.hubanov.controller.command.admin.CancelOrderCommand;
 import ua.hubanov.controller.command.admin.OrderDetailsCommand;
 import ua.hubanov.controller.command.admin.OrdersManagerCommand;
 import ua.hubanov.controller.command.user.AddToCartCommand;
+import ua.hubanov.controller.command.user.DeleteFromCartCommand;
 import ua.hubanov.controller.command.user.UserCartCommand;
 import ua.hubanov.controller.command.user.UserHomeCommand;
 
@@ -29,6 +30,7 @@ public class Servlet extends HttpServlet {
         commands.put("registration", new RegistrationCommand());
         commands.put("user_home/cart", new UserCartCommand());
         commands.put("user_home/addToCart", new AddToCartCommand());
+        commands.put("user_home/cart/delete", new DeleteFromCartCommand());
         commands.put("admin_home", new AdminHomeCommand());
         commands.put("admin_home/orders", new OrdersManagerCommand());
         commands.put("admin_home/orders/details", new OrderDetailsCommand());

@@ -22,5 +22,9 @@ public interface CartDao extends GenericDao<Cart> {
     Set<OrderedProduct> getAllOrderedProductsOfUser(User user) throws CartNotFoundException, SQLException, ProductNotFoundException;
 
     void addProductToCartByCartIdAndProductId(Long cartId, Long productId) throws StockQuantityIsNotEnoughException, AlreadyInCartException;
+
+    void updateNeededQuantity(Long cartId, Long productId, Integer neededQuantity) throws StockQuantityIsNotEnoughException;
+
+    void deleteProductFromCart(Long cartId, Long productId);
 }
 

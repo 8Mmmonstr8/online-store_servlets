@@ -40,9 +40,23 @@
                 <td>${product.getKey().getPublicationDate()}</td>
                 <td>${product.getKey().getQuantity()}</td>
                 <td>${product.getKey().getPrice()}</td>
-                <td>${product.getValue()}</td>
+<%--                <td>${product.getValue()}</td>--%>
+                <td>
+                    <form method="POST" action="${pageContext.request.contextPath}/user_home/cart">
+                        <div style="display:flex">
+                            <input name="neededQuantity"
+                                   value="${product.getValue()}"
+                                   size="2">
+                            <input type="hidden" id="productId" name="productId" value="${product.getKey().getId()}"/>
+                            <input type="submit" class="btn btn-sm btn-success" value="Submit">
+                        </div>
+                    </form>
+                </td>
+
                 <td>
     <%--                <a href="addToCart?id=${product.id}">Add to Cart</a>--%>
+                    <a href="${pageContext.request.contextPath}/user_home/cart/delete?productId=${product.getKey().getId()}">Delete</a>
+
                 </td>
 
             </tr>
