@@ -83,7 +83,15 @@ public class JDBCUserDao implements UserDao {
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(Long userId) {
+        String sql = "DELETE FROM user WHERE id = ?";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setLong(1, userId);
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 

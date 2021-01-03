@@ -39,4 +39,10 @@ public class UserService {
             dao.unblockUser(userId);
         }
     }
+
+    public void deleteUser(Long userId) {
+        try (UserDao dao = daoFactory.createUserDao()) {
+            dao.delete(userId);
+        }
+    }
 }

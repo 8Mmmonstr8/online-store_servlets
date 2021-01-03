@@ -24,4 +24,9 @@ public class UserServiceTests {
     public void unblockUserTest() {
         userService.unblockUser(37L);
     }
+
+    @Test
+    public void deleteUserTest() {
+        userService.deleteUser(37L);
+    }
 }
