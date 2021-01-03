@@ -1,10 +1,7 @@
 package ua.hubanov.controller;
 
 import ua.hubanov.controller.command.*;
-import ua.hubanov.controller.command.admin.AdminHomeCommand;
-import ua.hubanov.controller.command.admin.CancelOrderCommand;
-import ua.hubanov.controller.command.admin.OrderDetailsCommand;
-import ua.hubanov.controller.command.admin.OrdersManagerCommand;
+import ua.hubanov.controller.command.admin.*;
 import ua.hubanov.controller.command.user.*;
 
 import javax.servlet.ServletException;
@@ -33,6 +30,7 @@ public class Servlet extends HttpServlet {
         commands.put("admin_home/orders", new OrdersManagerCommand());
         commands.put("admin_home/orders/details", new OrderDetailsCommand());
         commands.put("admin_home/orders/decline", new CancelOrderCommand());
+        commands.put("admin_home/users", new UsersManagerCommand());
 //        commands.put("user/personal-account" , new PersonalAccount());
     }
 

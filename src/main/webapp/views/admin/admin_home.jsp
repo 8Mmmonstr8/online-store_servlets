@@ -23,9 +23,9 @@ User Role: <b>${role}</b>
 
 <a href="${pageContext.request.contextPath}/admin_home/orders" class="button">Orders</a>
 <br/>
-<a href="${pageContext.request.contextPath}/user_home/users" class="button">Users</a>
+<a href="${pageContext.request.contextPath}/admin_home/users" class="button">Users</a>
 <br/>
-<a href="${pageContext.request.contextPath}/user_home/products" class="button">Products</a>
+<a href="${pageContext.request.contextPath}/admin_home/products" class="button">Products</a>
 
 
 <jsp:include page="../blocks/footer.jsp"></jsp:include>
