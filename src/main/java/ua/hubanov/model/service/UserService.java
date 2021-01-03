@@ -27,4 +27,16 @@ public class UserService {
             return dao.create(newUser);
         }
     }
+
+    public void blockUser(Long userId) {
+        try (UserDao dao = daoFactory.createUserDao()) {
+            dao.blockUser(userId);
+        }
+    }
+
+    public void unblockUser(Long userId) {
+        try (UserDao dao = daoFactory.createUserDao()) {
+            dao.unblockUser(userId);
+        }
+    }
 }

@@ -122,4 +122,28 @@ public class JDBCUserDao implements UserDao {
 //            return null;
 //        }
     }
+
+    @Override
+    public void blockUser(Long userId) {
+        String sql = "UPDATE user SET is_non_locked = FALSE WHERE id = ?";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setLong(1, userId);
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void unblockUser(Long userId) {
+        String sql = "UPDATE user SET is_non_locked = TRUE WHERE id = ?";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setLong(1, userId);
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

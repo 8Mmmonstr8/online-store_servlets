@@ -14,4 +14,14 @@ public class UserServiceTests {
         List<User> users = userService.getAllUsers();
         users.forEach(x -> System.out.println(x.getEmail() + " " + x.getRole().name()));
     }
+
+    @Test
+    public void blockUserTest() {
+        userService.blockUser(37L);
+    }
+
+    @Test
+    public void unblockUserTest() {
+        userService.unblockUser(37L);
+    }
 }
