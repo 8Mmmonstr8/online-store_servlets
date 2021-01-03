@@ -5,6 +5,8 @@ import ua.hubanov.model.entity.Category;
 import ua.hubanov.model.entity.Product;
 import ua.hubanov.model.service.ProductService;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 public class ProductServiceTests {
@@ -25,5 +27,23 @@ public class ProductServiceTests {
     @Test
     public void createNewCategoryTest() {
         productService.createNewCategory("clothes");
+    }
+
+    @Test
+    public void createNewProductTest() {
+        Product product = new Product();
+        product.setName("Apple");
+        product.setDescription("fresh apple");
+        Category category = new Category();
+        category.setId(3L);
+        category.setName("Gadgets");
+        product.setCategory(category);
+        product.setPrice(BigDecimal.valueOf(10.0d));
+        product.setQuantity(1000);
+        product.setPublicationDate(new Date());
+
+        productService.createNewProduct(product);
+
+
     }
 }

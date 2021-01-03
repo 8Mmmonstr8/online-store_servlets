@@ -10,7 +10,7 @@
 
 <html>
 <head>
-    <title>Cart</title>
+    <title>Create Category</title>
 </head>
 <body>
 

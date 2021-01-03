@@ -7,6 +7,7 @@ import ua.hubanov.model.entity.Category;
 import ua.hubanov.model.entity.Product;
 
 import java.sql.*;
+import java.sql.Date;
 import java.util.*;
 
 public class JDBCProductDao implements ProductDao {
@@ -18,7 +19,27 @@ public class JDBCProductDao implements ProductDao {
     }
 
     @Override
-    public boolean create(Product entity) {
+    public boolean create(Product product) {
+        String sql = "INSERT INTO products (description, name, price, date, quantity, category_id) " +
+                "VALUES (?, ?, ?, ?, ? ,?)";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, product.getDescription());
+            ps.setString(2, product.getName());
+            ps.setBigDecimal(3, product.getPrice());
+//            ps.setDate(4, Date.valueOf(product.getPublicationDate()));
+            ps.setDate(4, new Date(product.getPublicationDate().getTime()));
+            ps.setInt(5, product.getQuantity());
+            ps.setLong(6, product.getCategory().getId());
+
+            ps.execute();
+
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return false;
     }
 

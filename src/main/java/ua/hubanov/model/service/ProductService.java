@@ -34,4 +34,10 @@ public class ProductService {
             dao.createNewCategory(catName);
         }
     }
+
+    public void createNewProduct(Product product) {
+        try (ProductDao dao = daoFactory.createProductDao()) {
+            dao.create(product);
+        }
+    }
 }
