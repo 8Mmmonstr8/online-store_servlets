@@ -34,6 +34,7 @@ public class Servlet extends HttpServlet {
         commands.put("admin_home/users/block", new BlockUserCommand());
         commands.put("admin_home/users/unblock", new UnblockUserCommand());
         commands.put("admin_home/users/delete", new DeleteUserCommand());
+        commands.put("admin_home/products", new ProductsManagerCommand());
 //        commands.put("user/personal-account" , new PersonalAccount());
     }
 
