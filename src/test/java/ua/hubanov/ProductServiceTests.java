@@ -46,4 +46,9 @@ public class ProductServiceTests {
 
 
     }
+
+    @Test
+    public void deleteProductTest() {
+        productService.deleteProduct(15L);
+    }
 }

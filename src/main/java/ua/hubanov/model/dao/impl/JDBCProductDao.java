@@ -94,8 +94,15 @@ public class JDBCProductDao implements ProductDao {
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(Long productId) {
+        String sql = "DELETE FROM products WHERE id = ?";
 
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setLong(1, productId);
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
