@@ -46,4 +46,10 @@ public class ProductService {
             dao.delete(productId);
         }
     }
+
+    public void updateProduct(Product product, Long productId) {
+        try (ProductDao dao = daoFactory.createProductDao()) {
+            dao.updateProduct(product, productId);
+        }
+    }
 }

@@ -8,4 +8,6 @@ import java.util.List;
 public interface ProductDao extends GenericDao<Product> {
     List<Category> findAllCategories();
     void createNewCategory(String catName);
+
+    void updateProduct(Product product, Long productId);
 }

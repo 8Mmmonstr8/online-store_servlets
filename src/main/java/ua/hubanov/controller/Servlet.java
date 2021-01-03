@@ -37,6 +37,7 @@ public class Servlet extends HttpServlet {
         commands.put("admin_home/products", new ProductsManagerCommand());
         commands.put("admin_home/products/create", new CreateProductCommand());
         commands.put("admin_home/products/delete", new DeleteProductCommand());
+        commands.put("admin_home/products/edit", new EditProductCommand());
         commands.put("admin_home/products/categories", new CategoriesManagerCommand());
         commands.put("admin_home/products/categories/create", new CreateCategoryCommand());
 //        commands.put("user/personal-account" , new PersonalAccount());

@@ -143,4 +143,24 @@ public class JDBCProductDao implements ProductDao {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void updateProduct(Product product, Long productId) {
+        String sql = "UPDATE products SET description = ?, name = ?, price = ?, date = ?, quantity = ?, category_id = ? " +
+                "WHERE id = ?";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, product.getDescription());
+            ps.setString(2, product.getName());
+            ps.setBigDecimal(3, product.getPrice());
+            ps.setDate(4, new Date(product.getPublicationDate().getTime()));
+            ps.setInt(5, product.getQuantity());
+            ps.setLong(6, product.getCategory().getId());
+            ps.setLong(7, productId);
+
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
