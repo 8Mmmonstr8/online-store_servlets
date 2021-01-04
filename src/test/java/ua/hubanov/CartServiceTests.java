@@ -43,6 +43,10 @@ public class CartServiceTests {
     public void checkOutTest() {
         User user = userService.findUserByEmail("test5@test5");
 
-        cartService.checkOut(user);
+        try {
+            cartService.checkOut(user);
+        } catch (StockQuantityIsNotEnoughException e) {
+            e.printStackTrace();
+        }
     }
 }

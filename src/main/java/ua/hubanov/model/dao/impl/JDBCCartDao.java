@@ -218,7 +218,10 @@ public class JDBCCartDao implements CartDao {
 
     // TODO add checking for product stock quantity
     @Override
-    public void checkOut(Long userId, Long cartId) {
+    public void checkOut(Long userId, Long cartId) throws StockQuantityIsNotEnoughException {
+        String sqlCheckQuantity = "SELECT p.quantity, icp.needed_quantity " +
+                "FROM products p, in_cart_product icp " +
+                "WHERE icp.cart_id = ? AND p.id = icp.product_id";
         String sql = "START TRANSACTION";
         String sql1 = "INSERT INTO orders (date, user_id, cart_id, is_approved) values (now(), ?, ?, ?)";
         String sql2 = "INSERT INTO ordered_products (description, name, price, quantity, category_id, product_id) " +
@@ -228,12 +231,23 @@ public class JDBCCartDao implements CartDao {
         String sql4 = "DELETE FROM in_cart_product WHERE cart_id = ?";
         String sql5 = "COMMIT";
 
-        try (PreparedStatement ps = connection.prepareStatement(sql);
+        try (PreparedStatement psCheck = connection.prepareStatement(sqlCheckQuantity);
+             PreparedStatement ps = connection.prepareStatement(sql);
              PreparedStatement ps1 = connection.prepareStatement(sql1, Statement.RETURN_GENERATED_KEYS);
              PreparedStatement ps2 = connection.prepareStatement(sql2);
              PreparedStatement ps3 = connection.prepareStatement(sql3);
              PreparedStatement ps4 = connection.prepareStatement(sql4);
              PreparedStatement ps5 = connection.prepareStatement(sql5)) {
+            psCheck.setLong(1, cartId);
+            ResultSet rsCheck = psCheck.executeQuery();
+            while (rsCheck.next()) {
+                int availableQuantity = rsCheck.getInt(1);
+                int neededQuantity = rsCheck.getInt(2);
+                if (availableQuantity < neededQuantity) {
+                    throw new StockQuantityIsNotEnoughException();
+                }
+            }
+
             connection.setAutoCommit(false);
 
             ps1.setLong(1, userId);

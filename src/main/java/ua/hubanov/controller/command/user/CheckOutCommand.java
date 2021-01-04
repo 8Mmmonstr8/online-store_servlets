@@ -1,6 +1,7 @@
 package ua.hubanov.controller.command.user;
 
 import ua.hubanov.controller.command.Command;
+import ua.hubanov.exceptions.StockQuantityIsNotEnoughException;
 import ua.hubanov.model.entity.User;
 import ua.hubanov.model.service.CartService;
 
@@ -17,7 +18,12 @@ public class CheckOutCommand implements Command {
         request.setAttribute("user", loggedUser);
         request.setAttribute("role", userRole);
 
-        cartService.checkOut(loggedUser);
+        //TODO handle exception
+        try {
+            cartService.checkOut(loggedUser);
+        } catch (StockQuantityIsNotEnoughException e) {
+            e.printStackTrace();
+        }
 
         return "redirect:/store/user_home/cart";
     }

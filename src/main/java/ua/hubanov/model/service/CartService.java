@@ -91,7 +91,7 @@ public class CartService {
         }
     }
 
-    public void checkOut(User user) {
+    public void checkOut(User user) throws StockQuantityIsNotEnoughException {
         try (CartDao dao = daoFactory.createCartDao()) {
             dao.checkOut(user.getId(), user.getCart().getId());
         }
