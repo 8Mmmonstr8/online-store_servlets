@@ -1,5 +1,6 @@
 package ua.hubanov.model.service.impl;
 
+import ua.hubanov.exceptions.StockQuantityIsNotEnoughException;
 import ua.hubanov.model.dao.DaoFactory;
 import ua.hubanov.model.dao.OrderDao;
 import ua.hubanov.model.entity.Order;
@@ -48,6 +49,13 @@ public class OrderServiceImpl implements OrderService {
     public void cancelOrder(Long orderId) {
         try (OrderDao dao = daoFactory.createOrderDao()) {
             dao.cancelOrder(orderId);
+        }
+    }
+
+    @Override
+    public void approveOrder(Long orderId) throws StockQuantityIsNotEnoughException {
+        try (OrderDao dao = daoFactory.createOrderDao()) {
+            dao.approveOrder(orderId);
         }
     }
 }

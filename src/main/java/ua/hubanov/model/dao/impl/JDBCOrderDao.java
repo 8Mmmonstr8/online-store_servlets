@@ -1,5 +1,6 @@
 package ua.hubanov.model.dao.impl;
 
+import ua.hubanov.exceptions.StockQuantityIsNotEnoughException;
 import ua.hubanov.model.dao.OrderDao;
 import ua.hubanov.model.dao.mapper.CategoryMapper;
 import ua.hubanov.model.dao.mapper.OrderMapper;
@@ -136,6 +137,31 @@ public class JDBCOrderDao implements OrderDao {
             } catch (SQLException throwable) {
                 throwable.printStackTrace();
             }
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void approveOrder(Long orderId) throws StockQuantityIsNotEnoughException {
+        String sql = "SELECT p.quantity, op.quantity FROM products p, ordered_products op " +
+                "WHERE p.id = op.product_id AND op.order_id = ?";
+        String sql1 = "UPDATE orders SET is_approved = TRUE WHERE id = ?";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql);
+             PreparedStatement ps1 = connection.prepareStatement(sql1)) {
+            ps.setLong(1, orderId);
+            ps1.setLong(1, orderId);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int availableQuantity = rs.getInt(1);
+                int neededQuantity = rs.getInt(2);
+                if (availableQuantity < neededQuantity) {
+                    throw new StockQuantityIsNotEnoughException();
+                }
+            }
+            ps1.execute();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

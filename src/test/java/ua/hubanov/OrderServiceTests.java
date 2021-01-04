@@ -1,6 +1,7 @@
 package ua.hubanov;
 
 import org.junit.Test;
+import ua.hubanov.exceptions.StockQuantityIsNotEnoughException;
 import ua.hubanov.model.entity.Order;
 import ua.hubanov.model.entity.OrderedProduct;
 import ua.hubanov.model.service.OrderService;
@@ -48,5 +49,14 @@ public class OrderServiceTests {
     @Test
     public void cancelOrderTest() {
         orderService.cancelOrder(30L);
+    }
+
+    @Test
+    public void approveOrderTest() {
+        try {
+            orderService.approveOrder(34L);
+        } catch (StockQuantityIsNotEnoughException e) {
+            e.printStackTrace();
+        }
     }
 }
