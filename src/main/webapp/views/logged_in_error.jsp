@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
+<head>
+    <title>Logged In Error</title>
+</head>
+<body>
+
+<jsp:include page="blocks/header.jsp"></jsp:include>
+
+<h3>You Are already logged in</h3>
+
+<a href="/store/user_home">Go back to Home</a>
+
+<jsp:include page="blocks/footer.jsp"></jsp:include>
+
+
+</body>
+</html>

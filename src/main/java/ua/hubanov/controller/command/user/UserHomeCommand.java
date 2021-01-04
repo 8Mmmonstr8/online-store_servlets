@@ -20,10 +20,10 @@ public class UserHomeCommand implements Command {
         String userRole = (String) session.getAttribute("role");
 
         // Если еще не вошел в систему (login).
-        if (loggedUser == null) {
-            // Redirect (Перенаправить) к странице login.
-            return "redirect:/store/login";
-        }
+//        if (loggedUser == null) {
+//            // Redirect (Перенаправить) к странице login.
+//            return "redirect:/store/login";
+//        }
         // Сохранить информацию в request attribute перед тем как forward (перенаправить).
         request.setAttribute("user", loggedUser);
         request.setAttribute("role", userRole);

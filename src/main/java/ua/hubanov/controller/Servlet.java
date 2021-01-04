@@ -17,11 +17,11 @@ public class Servlet extends HttpServlet {
 
     @Override
     public void init(){
+        commands.put("home", new HomeCommand());
         commands.put("logout", new LogOutCommand());
         commands.put("login", new LoginCommand());
-        commands.put("", new HomeCommand());
-        commands.put("user_home", new UserHomeCommand());
         commands.put("registration", new RegistrationCommand());
+        commands.put("user_home", new UserHomeCommand());
         commands.put("user_home/cart", new UserCartCommand());
         commands.put("user_home/addToCart", new AddToCartCommand());
         commands.put("user_home/cart/delete", new DeleteFromCartCommand());
