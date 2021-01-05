@@ -45,7 +45,17 @@
                 <td>${product.getKey().getDescription()}</td>
                 <td>${product.getKey().getPublicationDate()}</td>
                 <td>${product.getKey().getQuantity()}</td>
-                <td>${product.getKey().getPrice()}</td>
+<%--                <td>${product.getKey().getPrice()}</td>--%>
+                <td>
+                    <c:choose>
+                        <c:when test="${sessionScope.lang.equals('en') || sessionScope.lang == null}">
+                            ${product.getKey().getPrice()}
+                        </c:when>
+                        <c:otherwise>
+                            ${product.getKey().getPrice() * 28}
+                        </c:otherwise>
+                    </c:choose>
+                </td>
 <%--                <td>${product.getValue()}</td>--%>
                 <td>
                     <form method="POST" action="${pageContext.request.contextPath}/user_home/cart">
@@ -68,7 +78,18 @@
             </tr>
         </c:forEach>
     </table>
-    <p align="center"><b>Total sum: ${totalPrice}</b></p>
+<%--    <p align="center"><b>Total sum: ${totalPrice}</b></p>--%>
+    <p align="center"><b><fmt:message key="cartPage.tableProductsInCart.totalSum"/>
+        <c:choose>
+            <c:when test="${sessionScope.lang.equals('en') || sessionScope.lang == null}">
+                ${totalPrice}
+            </c:when>
+            <c:otherwise>
+                ${totalPrice * 28}
+            </c:otherwise>
+        </c:choose>
+    </b></p>
+
     <a href="${pageContext.request.contextPath}/user_home/cart/checkout"><fmt:message key="cartPage.tableProductsInCart.button.checkout"/></a>
 </div>
 
@@ -91,7 +112,17 @@
             <tr>
                 <td>${notApprovedOrderedProduct.getName()}</td>
                 <td>${notApprovedOrderedProduct.getQuantity()}</td>
-                <td>${notApprovedOrderedProduct.getPrice()}</td>
+<%--                <td>${notApprovedOrderedProduct.getPrice()}</td>--%>
+                <td>
+                    <c:choose>
+                        <c:when test="${sessionScope.lang.equals('en') || sessionScope.lang == null}">
+                            ${notApprovedOrderedProduct.getPrice()}
+                        </c:when>
+                        <c:otherwise>
+                            ${notApprovedOrderedProduct.getPrice() * 28}
+                        </c:otherwise>
+                    </c:choose>
+                </td>
                 <td>${notApprovedOrderedProduct.getCategory().getName()}</td>
                 <td>${notApprovedOrderedProduct.getDescription()}</td>
                 <td>${notApprovedOrderedProduct.getOrder().getId()}</td>
@@ -120,7 +151,17 @@
             <tr>
                 <td>${approvedOrderedProduct.getName()}</td>
                 <td>${approvedOrderedProduct.getQuantity()}</td>
-                <td>${approvedOrderedProduct.getPrice()}</td>
+<%--                <td>${approvedOrderedProduct.getPrice()}</td>--%>
+                <td>
+                    <c:choose>
+                        <c:when test="${sessionScope.lang.equals('en') || sessionScope.lang == null}">
+                            ${approvedOrderedProduct.getPrice()}
+                        </c:when>
+                        <c:otherwise>
+                            ${approvedOrderedProduct.getPrice() * 28}
+                        </c:otherwise>
+                    </c:choose>
+                </td>
                 <td>${approvedOrderedProduct.getCategory().getName()}</td>
                 <td>${approvedOrderedProduct.getDescription()}</td>
                 <td>${approvedOrderedProduct.getOrder().getId()}</td>

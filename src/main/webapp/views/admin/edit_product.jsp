@@ -9,6 +9,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<c:if test="${not empty param.lang}">
+    <fmt:setLocale value="${param.lang}" scope="session"/>
+</c:if>
+
+<fmt:setBundle basename="message"/>
+
 <html>
 <head>
     <title>Product Form</title>
@@ -18,30 +24,30 @@
 <jsp:include page="../blocks/header.jsp"></jsp:include>
 
 
-<h1 align="center">Create new Product</h1>
+<h1 align="center"><fmt:message key="editProductPage.title"/></h1>
 
 <div align="center">
     <form method="POST" action="${pageContext.request.contextPath}/admin_home/products/edit" >
         <table border="0">
             <input type="hidden" name="productId" value="${product.getId()}">
             <tr>
-                <td>Name</td>
+                <td><fmt:message key="editProductPage.label.name"/></td>
                 <td><input type="text" name="name" value="${product.getName()}"/> </td>
             </tr>
             <tr>
-                <td>Description</td>
+                <td><fmt:message key="editProductPage.label.description"/></td>
                 <td><input type="text" name="description" value="${product.getDescription()}"/> </td>
             </tr>
             <tr>
-                <td>Price</td>
+                <td><fmt:message key="editProductPage.label.price"/></td>
                 <td><input type="text" name="price" value="${product.getPrice()}"/> </td>
             </tr>
             <tr>
-                <td>Quantity</td>
+                <td><fmt:message key="editProductPage.label.quantity"/></td>
                 <td><input type="text" name="quantity" value="${product.getQuantity()}"/> </td>
             </tr>
             <tr>
-                <td>Date</td>
+                <td><fmt:message key="editProductPage.label.date"/></td>
                 <td><input type="date" name="date" value="${product.getPublicationDate()}"/> </td>
             </tr>
             <tr>
@@ -62,15 +68,15 @@
             </tr>
             <tr>
                 <td colspan ="2">
-                    <input type="submit" value= "Submit" />
-                    <a href="/store/">Cancel</a>
+                    <input type="submit" value= "<fmt:message key="editProductPage.button.submit"/>" />
+                    <a href="/store/"><fmt:message key="editProductPage.button.cancel"/></a>
                 </td>
             </tr>
         </table>
     </form>
 </div>
 
-<a href="${pageContext.request.contextPath}/admin_home/products/categories">Back</a>
+<a href="${pageContext.request.contextPath}/admin_home/products/categories"><fmt:message key="editProductPage.button.back"/></a>
 
 <jsp:include page="../blocks/footer.jsp"></jsp:include>
 

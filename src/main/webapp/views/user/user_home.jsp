@@ -34,7 +34,17 @@
         <tr>
             <td>${product.id}</td>
             <td>${product.name}</td>
-            <td>${product.price}</td>
+<%--            <td>${product.price}</td>--%>
+            <td>
+                <c:choose>
+                    <c:when test="${sessionScope.lang.equals('en') || sessionScope.lang == null}">
+                        ${product.price}
+                    </c:when>
+                    <c:otherwise>
+                        ${product.price * 28}
+                    </c:otherwise>
+                </c:choose>
+            </td>
             <td>${product.quantity}</td>
             <td>${product.description}</td>
             <td>${product.getCategory().getName()}</td>
