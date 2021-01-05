@@ -23,14 +23,14 @@
 
 <table border="1">
     <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Description</th>
-        <th>Category</th>
-        <th>Pub Date</th>
-        <th>Action</th>
+        <th><fmt:message key="homePage.table.label.id"/></th>
+        <th><fmt:message key="homePage.table.label.name"/></th>
+        <th><fmt:message key="homePage.table.label.price"/></th>
+        <th><fmt:message key="homePage.table.label.quantity"/></th>
+        <th><fmt:message key="homePage.table.label.description"/></th>
+        <th><fmt:message key="homePage.table.label.category"/></th>
+        <th><fmt:message key="homePage.table.label.pubDate"/></th>
+        <th><fmt:message key="homePage.table.label.Action"/></th>
     </tr>
     <c:forEach items="${products}" var="product" >
         <tr>
@@ -42,7 +42,7 @@
             <td>${product.getCategory().getName()}</td>
             <td>${product.publicationDate}</td>
             <td>
-                <a href="addToCart?id=${product.id}">Add to Cart</a>
+                <a href="addToCart?id=${product.id}"><fmt:message key="homePage.table.button.addToCart"/></a>
             </td>
                 <%--                    <td>--%>
                 <%--                        <a href="deleteProduct?code=${product.code}">Delete</a>--%>

@@ -3,6 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<c:if test="${not empty param.lang}">
+    <fmt:setLocale value="${param.lang}" scope="session"/>
+</c:if>
+
+<fmt:setBundle basename="message"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,14 +21,14 @@
 
 <table border="1">
     <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Description</th>
-        <th>Category</th>
-        <th>Pub Date</th>
-        <th>Action</th>
+        <th><fmt:message key="userHomePage.table.label.id"/></th>
+        <th><fmt:message key="userHomePage.table.label.name"/></th>
+        <th><fmt:message key="userHomePage.table.label.price"/></th>
+        <th><fmt:message key="userHomePage.table.label.quantity"/></th>
+        <th><fmt:message key="userHomePage.table.label.description"/></th>
+        <th><fmt:message key="userHomePage.table.label.category"/></th>
+        <th><fmt:message key="userHomePage.table.label.pubDate"/></th>
+        <th><fmt:message key="userHomePage.table.label.Action"/></th>
     </tr>
     <c:forEach items="${products}" var="product" >
         <tr>
@@ -34,7 +40,7 @@
             <td>${product.getCategory().getName()}</td>
             <td>${product.publicationDate}</td>
             <td>
-                <a href="${pageContext.request.contextPath}/user_home/addToCart?productId=${product.id}">Add to Cart</a>
+                <a href="${pageContext.request.contextPath}/user_home/addToCart?productId=${product.id}"><fmt:message key="userHomePage.table.button.addToCart"/></a>
             </td>
                 <%--                    <td>--%>
                 <%--                        <a href="deleteProduct?code=${product.code}">Delete</a>--%>

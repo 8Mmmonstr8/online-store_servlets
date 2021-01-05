@@ -9,6 +9,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<c:if test="${not empty param.lang}">
+    <fmt:setLocale value="${param.lang}" scope="session"/>
+</c:if>
+
+<fmt:setBundle basename="message"/>
+
 <html>
 <head>
     <title>Cart</title>
@@ -17,20 +23,20 @@
 
 <jsp:include page="../blocks/header.jsp"></jsp:include>
 
-<h1 align="center">Cart</h1>
+<h1 align="center"><fmt:message key="cartPage.title"/></h1>
 
 <div align="center">
     <table border="1" cellpadding="5">
-        <caption><h2>Products in cart</h2></caption>
+        <caption><h2><fmt:message key="cartPage.tableProductsInCart.tableName"/></h2></caption>
         <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Description</th>
-            <th>Pub Date</th>
-            <th>Available Quantity</th>
-            <th>Price</th>
-            <th>Needed Quantity</th>
-            <th>Action</th>
+            <th><fmt:message key="cartPage.tableProductsInCart.label.name"/></th>
+            <th><fmt:message key="cartPage.tableProductsInCart.label.category"/></th>
+            <th><fmt:message key="cartPage.tableProductsInCart.label.description"/></th>
+            <th><fmt:message key="cartPage.tableProductsInCart.label.pubDate"/></th>
+            <th><fmt:message key="cartPage.tableProductsInCart.label.availableQuantity"/></th>
+            <th><fmt:message key="cartPage.tableProductsInCart.label.price"/></th>
+            <th><fmt:message key="cartPage.tableProductsInCart.label.neededQuantity"/></th>
+            <th><fmt:message key="cartPage.tableProductsInCart.label.Action"/></th>
         </tr>
         <c:forEach items="${products}" var="product" >
             <tr>
@@ -48,14 +54,14 @@
                                    value="${product.getValue()}"
                                    size="2">
                             <input type="hidden" id="productId" name="productId" value="${product.getKey().getId()}"/>
-                            <input type="submit" class="btn btn-sm btn-success" value="Submit">
+                            <input type="submit" class="btn btn-sm btn-success" value="<fmt:message key="cartPage.tableProductsInCart.button.submit"/>">
                         </div>
                     </form>
                 </td>
 
                 <td>
     <%--                <a href="addToCart?id=${product.id}">Add to Cart</a>--%>
-                    <a href="${pageContext.request.contextPath}/user_home/cart/delete?productId=${product.getKey().getId()}">Delete</a>
+                    <a href="${pageContext.request.contextPath}/user_home/cart/delete?productId=${product.getKey().getId()}"><fmt:message key="cartPage.tableProductsInCart.button.delete"/></a>
 
                 </td>
 
@@ -63,23 +69,22 @@
         </c:forEach>
     </table>
     <p align="center"><b>Total sum: ${totalPrice}</b></p>
-    <a href="${pageContext.request.contextPath}/user_home/cart/checkout">Checkout</a>
+    <a href="${pageContext.request.contextPath}/user_home/cart/checkout"><fmt:message key="cartPage.tableProductsInCart.button.checkout"/></a>
 </div>
 
 <br/>
 
 <div align="center">
     <table border="1" cellpadding="5">
-        <caption><h2>Waiting for approval</h2></caption>
+        <caption><h2><fmt:message key="cartPage.tableWaitingForApproval.tableName"/></h2></caption>
         <tr>
-            <th>Name</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>Description</th>
-            <th>Order Id</th>
-            <th>Order Date</th>
-            <th>Is Order Approved</th>
+            <th><fmt:message key="cartPage.tableWaitingForApproval.label.name"/></th>
+            <th><fmt:message key="cartPage.tableWaitingForApproval.label.quantity"/></th>
+            <th><fmt:message key="cartPage.tableWaitingForApproval.label.price"/></th>
+            <th><fmt:message key="cartPage.tableWaitingForApproval.label.category"/></th>
+            <th><fmt:message key="cartPage.tableWaitingForApproval.label.description"/></th>
+            <th><fmt:message key="cartPage.tableWaitingForApproval.label.orderId"/></th>
+            <th><fmt:message key="cartPage.tableWaitingForApproval.label.orderDate"/></th>
 
         </tr>
         <c:forEach items="${notApprovedOrderedProducts}" var="notApprovedOrderedProduct" >
@@ -91,7 +96,6 @@
                 <td>${notApprovedOrderedProduct.getDescription()}</td>
                 <td>${notApprovedOrderedProduct.getOrder().getId()}</td>
                 <td>${notApprovedOrderedProduct.getOrder().getOrderDate()}</td>
-                <td>${notApprovedOrderedProduct.getOrder().isApproved()}</td>
             </tr>
         </c:forEach>
     </table>
@@ -101,16 +105,15 @@
 
 <div align="center">
     <table border="1" cellpadding="5">
-        <caption><h2>Ordered products</h2></caption>
+        <caption><h2><fmt:message key="cartPage.tableOrderedProducts.tableName"/></h2></caption>
         <tr>
-            <th>Name</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>Description</th>
-            <th>Order Id</th>
-            <th>Order Date</th>
-            <th>Is Order Approved</th>
+            <th><fmt:message key="cartPage.tableOrderedProducts.label.name"/></th>
+            <th><fmt:message key="cartPage.tableOrderedProducts.label.quantity"/></th>
+            <th><fmt:message key="cartPage.tableOrderedProducts.label.price"/></th>
+            <th><fmt:message key="cartPage.tableOrderedProducts.label.category"/></th>
+            <th><fmt:message key="cartPage.tableOrderedProducts.label.description"/></th>
+            <th><fmt:message key="cartPage.tableOrderedProducts.label.orderId"/></th>
+            <th><fmt:message key="cartPage.tableOrderedProducts.label.orderDate"/></th>
 
         </tr>
         <c:forEach items="${approvedOrderedProducts}" var="approvedOrderedProduct" >
@@ -122,7 +125,6 @@
                 <td>${approvedOrderedProduct.getDescription()}</td>
                 <td>${approvedOrderedProduct.getOrder().getId()}</td>
                 <td>${approvedOrderedProduct.getOrder().getOrderDate()}</td>
-                <td>${approvedOrderedProduct.getOrder().isApproved()}</td>
             </tr>
         </c:forEach>
     </table>

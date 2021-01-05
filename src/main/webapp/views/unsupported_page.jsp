@@ -2,6 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<c:if test="${not empty param.lang}">
+    <fmt:setLocale value="${param.lang}" scope="session"/>
+</c:if>
+
+<fmt:setBundle basename="message"/>
+
 <html>
 <head>
     <title>Unsupported Page</title>
@@ -10,9 +16,9 @@
 
 <jsp:include page="blocks/header.jsp"></jsp:include>
 
-<h3>This Page is not supported right now</h3>
+<h3><fmt:message key="unsupportedPage.message"/></h3>
 
-<a href="/store/">Go back to Home</a>
+<a href="/store/"><fmt:message key="unsupportedPage.button.main"/></a>
 
 <jsp:include page="blocks/footer.jsp"></jsp:include>
 
