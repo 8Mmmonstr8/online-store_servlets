@@ -3,6 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<c:if test="${not empty param.lang}">
+    <fmt:setLocale value="${param.lang}" scope="session"/>
+</c:if>
+
+<fmt:setBundle basename="message"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,10 +24,10 @@
 
 <div align="center">
     <table border="1" cellpadding="5">
-        <caption><h2>Categories</h2></caption>
+        <caption><h2><fmt:message key="categoriesPage.title"/></h2></caption>
         <tr>
-            <th>Id</th>
-            <th>Name</th>
+            <th><fmt:message key="categoriesPage.table.label.id"/></th>
+            <th><fmt:message key="categoriesPage.table.label.name"/></th>
         </tr>
         <c:forEach items="${categories}" var="category" >
             <tr>
@@ -36,9 +42,9 @@
     </table>
 </div>
 
-<a href="${pageContext.request.contextPath}/admin_home/products/categories/create">Create new category</a>
+<a href="${pageContext.request.contextPath}/admin_home/products/categories/create"><fmt:message key="categoriesPage.button.createNewCategory"/></a>
 <br/>
-<a href="${pageContext.request.contextPath}/admin_home/products">Back</a>
+<a href="${pageContext.request.contextPath}/admin_home/products"><fmt:message key="categoriesPage.button.back"/></a>
 
 <jsp:include page="../blocks/footer.jsp"></jsp:include>
 

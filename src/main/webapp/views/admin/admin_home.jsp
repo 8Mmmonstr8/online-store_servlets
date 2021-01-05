@@ -3,6 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<c:if test="${not empty param.lang}">
+    <fmt:setLocale value="${param.lang}" scope="session"/>
+</c:if>
+
+<fmt:setBundle basename="message"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,11 +21,11 @@
 
 <br/>
 
-<a href="${pageContext.request.contextPath}/admin_home/orders" class="button">Orders</a>
+<a href="${pageContext.request.contextPath}/admin_home/orders" class="button"><fmt:message key="adminHomePage.button.orders"/></a>
 <br/>
-<a href="${pageContext.request.contextPath}/admin_home/users" class="button">Users</a>
+<a href="${pageContext.request.contextPath}/admin_home/users" class="button"><fmt:message key="adminHomePage.button.users"/></a>
 <br/>
-<a href="${pageContext.request.contextPath}/admin_home/products" class="button">Products</a>
+<a href="${pageContext.request.contextPath}/admin_home/products" class="button"><fmt:message key="adminHomePage.button.products"/></a>
 
 
 <jsp:include page="../blocks/footer.jsp"></jsp:include>
