@@ -2,9 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:if test="${empty param.lang}">
-    <fmt:setLocale value="en" scope="session"/>
-</c:if>
+<%--<c:if test="${empty param.lang}">--%>
+<%--    <fmt:setLocale value="en" scope="session"/>--%>
+<%--</c:if>--%>
 <c:if test="${not empty param.lang}">
     <fmt:setLocale value="${param.lang}" scope="session"/>
 </c:if>
@@ -57,7 +57,7 @@
                     <td>${product.getCategory().getName()}</td>
                     <td>${product.publicationDate}</td>
                     <td>
-                        <a class="btn btn-sm btn-primary" href="addToCart?id=${product.id}"><fmt:message key="homePage.table.button.addToCart"/></a>
+                        <a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/login"><fmt:message key="homePage.table.button.addToCart"/></a>
                     </td>
                         <%--                    <td>--%>
                         <%--                        <a href="deleteProduct?code=${product.code}">Delete</a>--%>
@@ -66,7 +66,60 @@
             </c:forEach>
         </table>
     </div>
+    <nav aria-label="Navigation for products">
+        <ul class="pagination">
+            <c:if test="${currentPage != 1}">
+                <li class="page-item"><a class="page-link"
+                                         href="/store/home?recordsPerPage=${recordsPerPage}&currentPage=${currentPage-1}">Previous</a>
+                </li>
+            </c:if>
+
+            <c:forEach begin="1" end="${noOfPages}" var="i">
+                <c:choose>
+                    <c:when test="${currentPage eq i}">
+                        <li class="page-item active"><a class="page-link">
+                                ${i} <span class="sr-only">(current)</span></a>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="page-item"><a class="page-link"
+                                                 href="/store/home?recordsPerPage=${recordsPerPage}&currentPage=${i}">${i}</a>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+
+            <c:if test="${currentPage lt noOfPages}">
+                <li class="page-item"><a class="page-link"
+                                         href="/store/home?recordsPerPage=${recordsPerPage}&currentPage=${currentPage+1}">Next</a>
+                </li>
+            </c:if>
+        </ul>
+    </nav>
 </main>
+
+<main class="m-3">
+    <form action="${pageContext.request.contextPath}/home">
+
+        <%--  <input type="hidden" name="currentPage" value="1">  --%>
+
+        <div class="form-group col-md-4">
+
+            <label for="records">Select records per page:</label>
+
+            <select class="form-control" id="records" name="recordsPerPage">
+                <option value="5">5</option>
+                <option value="10" selected>10</option>
+                <option value="15">15</option>
+            </select>
+
+        </div>
+
+        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+
+    </form>
+</main>
+
 
 <jsp:include page="blocks/footer.jsp"></jsp:include>
 
