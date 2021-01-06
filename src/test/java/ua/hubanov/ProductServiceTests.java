@@ -51,4 +51,22 @@ public class ProductServiceTests {
     public void deleteProductTest() {
         productService.deleteProduct(15L);
     }
+
+    @Test
+    public void getAllProductWithLimitTest() {
+        List<Product> products = productService.getAllProductsWithLimit(3, 5);
+        products.forEach(x -> System.out.println(x.getId() + " " + x.getCategory().getName()));
+    }
+
+    @Test
+    public void findAllProducts() {
+        List<Product> products = productService.getAllProducts();
+        products.forEach(x -> System.out.println(x.getId() + " " + x.getName() + " " + x.getCategory().getName()));
+    }
+
+    @Test
+    public void getNumberOfRowsTest() {
+        int numOfRows = productService.getNumberOfRows();
+        System.out.println(numOfRows);
+    }
 }

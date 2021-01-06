@@ -10,4 +10,8 @@ public interface ProductDao extends GenericDao<Product> {
     void createNewCategory(String catName);
 
     void updateProduct(Product product, Long productId);
+
+    List<Product> getAllProductWithLimit(int currentPage, int recordsPerPage);
+
+    int getNumberOfRows();
 }

@@ -52,4 +52,16 @@ public class ProductService {
             dao.updateProduct(product, productId);
         }
     }
+
+    public List<Product> getAllProductsWithLimit(int currentPage, int recordsPerPage) {
+        try (ProductDao dao = daoFactory.createProductDao()) {
+            return dao.getAllProductWithLimit(currentPage, recordsPerPage);
+        }
+    }
+
+    public int getNumberOfRows() {
+        try (ProductDao dao = daoFactory.createProductDao()) {
+            return dao.getNumberOfRows();
+        }
+    }
 }
