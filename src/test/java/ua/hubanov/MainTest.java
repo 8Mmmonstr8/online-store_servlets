@@ -34,12 +34,6 @@ public class MainTest {
     }
 
     @Test
-    public void findAllProducts() {
-        List<Product> products = productService.getAllProducts();
-        products.forEach(x -> System.out.println(x.getName() + " " + x.getCategory().getName()));
-    }
-
-    @Test
     public void findByEmailTest() throws Exception {
         User user = userService.findUserByEmail("admin@admin.com");
         System.out.println(user.getId());

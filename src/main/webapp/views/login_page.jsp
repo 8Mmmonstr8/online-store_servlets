@@ -15,6 +15,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+          crossorigin="anonymous">
 </head>
 <body>
 
@@ -37,12 +40,12 @@
         </tr>
         <tr>
             <td colspan ="2">
-                <input type="submit" value= "<fmt:message key="loginPage.button.submit"/>" />
-                <a href="${pageContext.request.contextPath}/"><fmt:message key="loginPage.button.cancel"/></a>
+                <input class="btn btn-sm btn-primary" type="submit" value= "<fmt:message key="loginPage.button.submit"/>" />
+                <a class="btn btn-sm btn-danger" href="${pageContext.request.contextPath}/"><fmt:message key="loginPage.button.cancel"/></a>
             </td>
         </tr>
         <tr>
-            <a href="${pageContext.request.contextPath}/registration"><fmt:message key="loginPage.button.register"/></a>
+            <a class="btn btn-sm btn-warning" href="${pageContext.request.contextPath}/registration"><fmt:message key="loginPage.button.register"/></a>
         </tr>
     </table>
 </form>

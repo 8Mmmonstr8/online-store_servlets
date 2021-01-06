@@ -14,6 +14,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Orders</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+          crossorigin="anonymous">
 </head>
 <body>
 
@@ -21,8 +24,9 @@
 
 <br/>
 
-<div align="center">
-    <table border="1" cellpadding="5">
+<main class="float-none m-3">
+    <div class="row col-md-8">
+        <table class="table table-striped table-bordered table-sm">
         <caption><h2><fmt:message key="ordersPage.tables.tableWaitingForApproval"/></h2></caption>
         <tr>
             <th><fmt:message key="ordersPage.tables.label.id"/></th>
@@ -41,19 +45,21 @@
                 <td>${notApprovedOrder.getCart().getId()}</td>
                 <td>${notApprovedOrder.isApproved()}</td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/admin_home/orders/approve?orderId=${notApprovedOrder.getId()}"><fmt:message key="ordersPage.tables.button.approve"/></a>
-                    <a href="${pageContext.request.contextPath}/admin_home/orders/decline?orderId=${notApprovedOrder.getId()}"><fmt:message key="ordersPage.tables.button.decline"/></a>
-                    <a href="${pageContext.request.contextPath}/admin_home/orders/details?orderId=${notApprovedOrder.getId()}"><fmt:message key="ordersPage.tables.button.details"/></a>
+                    <a class="btn btn-sm btn-success" href="${pageContext.request.contextPath}/admin_home/orders/approve?orderId=${notApprovedOrder.getId()}"><fmt:message key="ordersPage.tables.button.approve"/></a>
+                    <a class="btn btn-sm btn-danger" href="${pageContext.request.contextPath}/admin_home/orders/decline?orderId=${notApprovedOrder.getId()}"><fmt:message key="ordersPage.tables.button.decline"/></a>
+                    <a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/admin_home/orders/details?orderId=${notApprovedOrder.getId()}"><fmt:message key="ordersPage.tables.button.details"/></a>
                 </td>
             </tr>
         </c:forEach>
     </table>
 </div>
+</main>
 
 <br/>
 
-<div align="center">
-    <table border="1" cellpadding="5">
+<main class="float-none m-3">
+    <div class="row col-md-8">
+        <table class="table table-striped table-bordered table-sm">
         <caption><h2><fmt:message key="ordersPage.tables.tableApprovedOrders"/></h2></caption>
         <tr>
             <th><fmt:message key="ordersPage.tables.label.id"/></th>
@@ -72,16 +78,17 @@
                 <td>${approvedOrder.getCart().getId()}</td>
                 <td>${approvedOrder.isApproved()}</td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/admin_home/orders/details?orderId=${approvedOrder.getId()}"><fmt:message key="ordersPage.tables.button.details"/></a>
+                    <a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/admin_home/orders/details?orderId=${approvedOrder.getId()}"><fmt:message key="ordersPage.tables.button.details"/></a>
                 </td>
             </tr>
         </c:forEach>
     </table>
 </div>
+</main>
 
 
 
-<a href="${pageContext.request.contextPath}/admin_home"><fmt:message key="ordersPage.button.back"/></a>
+<a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/admin_home"><fmt:message key="ordersPage.button.back"/></a>
 
 <jsp:include page="../blocks/footer.jsp"></jsp:include>
 

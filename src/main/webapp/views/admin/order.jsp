@@ -14,6 +14,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Order Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+          crossorigin="anonymous">
 </head>
 <body>
 
@@ -73,7 +76,7 @@
 
 </div>
 
-<a href="${pageContext.request.contextPath}/admin_home/orders"><fmt:message key="orderPage.button.back"/></a>
+<a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/admin_home/orders"><fmt:message key="orderPage.button.back"/></a>
 
 <jsp:include page="../blocks/footer.jsp"></jsp:include>
 

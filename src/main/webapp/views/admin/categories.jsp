@@ -14,6 +14,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Categories</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+          crossorigin="anonymous">
 </head>
 <body>
 
@@ -22,8 +25,9 @@
 <br/>
 
 
-<div align="center">
-    <table border="1" cellpadding="5">
+<main class="float-none m-3">
+    <div class="row col-md-8">
+        <table class="table table-striped table-bordered table-sm">
         <caption><h2><fmt:message key="categoriesPage.title"/></h2></caption>
         <tr>
             <th><fmt:message key="categoriesPage.table.label.id"/></th>
@@ -41,10 +45,11 @@
         </c:forEach>
     </table>
 </div>
+</main>
 
-<a href="${pageContext.request.contextPath}/admin_home/products/categories/create"><fmt:message key="categoriesPage.button.createNewCategory"/></a>
+<a class="btn btn-sm btn-success" href="${pageContext.request.contextPath}/admin_home/products/categories/create"><fmt:message key="categoriesPage.button.createNewCategory"/></a>
 <br/>
-<a href="${pageContext.request.contextPath}/admin_home/products"><fmt:message key="categoriesPage.button.back"/></a>
+<a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/admin_home/products"><fmt:message key="categoriesPage.button.back"/></a>
 
 <jsp:include page="../blocks/footer.jsp"></jsp:include>
 

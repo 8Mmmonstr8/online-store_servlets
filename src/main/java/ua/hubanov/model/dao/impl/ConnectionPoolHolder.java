@@ -13,7 +13,7 @@ public class ConnectionPoolHolder {
                 if (dataSource == null) {
                     BasicDataSource ds = new BasicDataSource();
                     ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
-                    ds.setUrl("jdbc:mysql://localhost:3306/online_store?useUnicode=true&serverTimezone=UTC");
+                    ds.setUrl("jdbc:mysql://localhost:3306/online_store_servlets?useUnicode=true&serverTimezone=UTC");
                     ds.setUsername("root");
                     ds.setPassword("r1o2o3t4");
                     ds.setMinIdle(5);

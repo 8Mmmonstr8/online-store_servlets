@@ -14,6 +14,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Users</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+          crossorigin="anonymous">
 </head>
 <body>
 
@@ -21,8 +24,9 @@
 
 <br/>
 
-<div align="center">
-    <table border="1" cellpadding="5">
+<main class="float-none m-3">
+    <div class="row col-md-8">
+        <table class="table table-striped table-bordered table-sm">
         <caption><h2><fmt:message key="usersPage.title"/></h2></caption>
         <tr>
             <th><fmt:message key="usersPage.table.label.id"/></th>
@@ -43,17 +47,18 @@
                 <td>${user.getRole().name()}</td>
                 <td>${user.isNonLocked()}</td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/admin_home/users/block?userId=${user.getId()}"><fmt:message key="usersPage.table.button.block"/></a>
-                    <a href="${pageContext.request.contextPath}/admin_home/users/unblock?userId=${user.getId()}"><fmt:message key="usersPage.table.button.unblock"/></a>
-                    <a href="${pageContext.request.contextPath}/admin_home/users/delete?userId=${user.getId()}"><fmt:message key="usersPage.table.button.delete"/></a>
+                    <a class="btn btn-sm btn-warning" href="${pageContext.request.contextPath}/admin_home/users/block?userId=${user.getId()}"><fmt:message key="usersPage.table.button.block"/></a>
+                    <a class="btn btn-sm btn-success" href="${pageContext.request.contextPath}/admin_home/users/unblock?userId=${user.getId()}"><fmt:message key="usersPage.table.button.unblock"/></a>
+                    <a class="btn btn-sm btn-danger" href="${pageContext.request.contextPath}/admin_home/users/delete?userId=${user.getId()}"><fmt:message key="usersPage.table.button.delete"/></a>
                 </td>
             </tr>
         </c:forEach>
     </table>
-</div>
+    </div>
+</main>
 
 
-<a href="${pageContext.request.contextPath}/admin_home"><fmt:message key="usersPage.button.back"/></a>
+<a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/admin_home"><fmt:message key="usersPage.button.back"/></a>
 
 <jsp:include page="../blocks/footer.jsp"></jsp:include>
 

@@ -18,6 +18,9 @@
 <html>
 <head>
     <title>Product Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+          crossorigin="anonymous">
 </head>
 <body>
 
@@ -67,15 +70,15 @@
             </tr>
             <tr>
                 <td colspan ="2">
-                    <input type="submit" value= "<fmt:message key="productFormPage.button.create"/>" />
-                    <a href="/store/"><fmt:message key="productFormPage.button.cancel"/></a>
+                    <input class="btn btn-sm btn-success" type="submit" value= "<fmt:message key="productFormPage.button.create"/>" />
+                    <a class="btn btn-sm btn-danger" href="/store/"><fmt:message key="productFormPage.button.cancel"/></a>
                 </td>
             </tr>
         </table>
     </form>
 </div>
 
-<a href="${pageContext.request.contextPath}/admin_home/products/categories"><fmt:message key="productFormPage.button.back"/></a>
+<a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/admin_home/products/categories"><fmt:message key="productFormPage.button.back"/></a>
 
 <jsp:include page="../blocks/footer.jsp"></jsp:include>
 
