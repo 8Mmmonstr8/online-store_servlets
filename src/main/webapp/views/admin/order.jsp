@@ -24,8 +24,9 @@
 
 <br/>
 
-<div align="center">
-    <table border="1" cellpadding="5">
+<main class="float-none m-3">
+    <div class="row col-md-8">
+        <table class="table table-striped table-bordered table-sm">
         <caption><h2><fmt:message key="orderPage.title"/></h2></caption>
         <tr>
             <th><fmt:message key="orderPage.tableOrder.label.name"/></th>
@@ -75,6 +76,7 @@
     </b></p>
 
 </div>
+</main>
 
 <a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/admin_home/orders"><fmt:message key="orderPage.button.back"/></a>
 

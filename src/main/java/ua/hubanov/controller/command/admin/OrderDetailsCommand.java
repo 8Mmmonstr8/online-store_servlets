@@ -4,7 +4,6 @@ import ua.hubanov.controller.command.Command;
 import ua.hubanov.model.entity.OrderedProduct;
 import ua.hubanov.model.entity.User;
 import ua.hubanov.model.service.OrderService;
-import ua.hubanov.model.service.impl.OrderServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -18,7 +17,7 @@ public class OrderDetailsCommand implements Command {
         request.setAttribute("user", loggedUser);
         request.setAttribute("role", userRole);
 
-        OrderService orderService = new OrderServiceImpl();
+        OrderService orderService = new OrderService();
         Long orderId = Long.valueOf(request.getParameter("orderId"));
 
         List<OrderedProduct> orderedProductList = orderService.findAllOrderedProductsByOrderId(orderId);

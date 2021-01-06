@@ -5,12 +5,11 @@ import ua.hubanov.exceptions.StockQuantityIsNotEnoughException;
 import ua.hubanov.model.entity.Order;
 import ua.hubanov.model.entity.OrderedProduct;
 import ua.hubanov.model.service.OrderService;
-import ua.hubanov.model.service.impl.OrderServiceImpl;
 
 import java.util.List;
 
 public class OrderServiceTests {
-    OrderService orderService = new OrderServiceImpl();
+    OrderService orderService = new OrderService();
 
     @Test
     public void getAllOrdersTest() {
