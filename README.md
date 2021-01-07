@@ -2,6 +2,7 @@
 
 ## Description
 Online store. The store provides a list of products that a registered customer can add to the cart, and then place an order. An unregistered customer does not have this option, but can view the products.
+
 Administrator has the rights to:
 - adding / deleting goods, changing product information;
 - user lock / unlock / delete;
