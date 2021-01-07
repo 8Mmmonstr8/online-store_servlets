@@ -85,7 +85,7 @@
         <version>2.2</version>
         <configuration>
           <port>8081</port>
-          <path>/</path>
+          <path>/store</path>
         </configuration>
       </plugin>
 

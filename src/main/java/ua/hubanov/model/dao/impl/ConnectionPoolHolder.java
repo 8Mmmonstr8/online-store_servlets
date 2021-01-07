@@ -5,6 +5,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import javax.sql.DataSource;
+import java.util.ResourceBundle;
 
 public class ConnectionPoolHolder {
     private static final Logger LOGGER = LogManager.getLogger(ConnectionPoolHolder.class);
@@ -15,14 +16,15 @@ public class ConnectionPoolHolder {
         if (dataSource == null) {
             synchronized (ConnectionPoolHolder.class) {
                 if (dataSource == null) {
+                    ResourceBundle bundle = ResourceBundle.getBundle("database");
                     BasicDataSource ds = new BasicDataSource();
-                    ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
-                    ds.setUrl("jdbc:mysql://localhost:3306/online_store_servlets?useUnicode=true&serverTimezone=UTC");
-                    ds.setUsername("root");
-                    ds.setPassword("r1o2o3t4");
-                    ds.setMinIdle(5);
-                    ds.setMaxIdle(10);
-                    ds.setMaxOpenPreparedStatements(100);
+                    ds.setDriverClassName(bundle.getString("db.driver"));
+                    ds.setUrl(bundle.getString("db.url"));
+                    ds.setUsername(bundle.getString("db.user"));
+                    ds.setPassword(bundle.getString("db.password"));
+                    ds.setMinIdle(Integer.parseInt(bundle.getString("db.minIdle")));
+                    ds.setMaxIdle(Integer.parseInt(bundle.getString("db.maxIdle")));
+                    ds.setMaxOpenPreparedStatements(Integer.parseInt(bundle.getString("db.maxOpenStatement")));
 
                     dataSource = ds;
                     LOGGER.info("connection pool created");

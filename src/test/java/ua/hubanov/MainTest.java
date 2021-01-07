@@ -2,6 +2,7 @@ package ua.hubanov;
 
 
 import org.junit.Test;
+import org.mindrot.jbcrypt.BCrypt;
 import ua.hubanov.exceptions.CartNotFoundException;
 import ua.hubanov.exceptions.ProductNotFoundException;
 import ua.hubanov.model.dao.impl.JDBCCartDao;
@@ -109,5 +110,12 @@ public class MainTest {
 
         Map<Product, Integer> inCartProducts = cartService.getAllProductsInCart(user);
         System.out.println(cartService.getTotal(inCartProducts));
+    }
+
+    @Test
+    public void encodePassword() {
+        String password = "user";
+        String encryptedPW = BCrypt.hashpw(password, BCrypt.gensalt());
+        System.out.println(encryptedPW);
     }
 }
