@@ -1,6 +1,7 @@
 package ua.hubanov.model.dao.impl;
 
-import ua.hubanov.exceptions.CartNotFoundException;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import ua.hubanov.exceptions.UserNotFoundException;
 import ua.hubanov.model.dao.UserDao;
 import ua.hubanov.model.dao.mapper.UserMapper;
@@ -12,6 +13,7 @@ import java.sql.*;
 import java.util.*;
 
 public class JDBCUserDao implements UserDao {
+    private static final Logger LOGGER = LogManager.getLogger(JDBCUserDao.class);
     private final Connection connection;
     private final CartService cartService = new CartService();
 
@@ -40,8 +42,10 @@ public class JDBCUserDao implements UserDao {
             if (rowsInserted > 0) {
                 System.out.println("A new user was inserted successfully!");
             }
+            LOGGER.info("user created");
             return true;
         } catch (SQLException e) {
+            LOGGER.error("User was not created", e);
             e.printStackTrace();
             return false;
         }
@@ -65,8 +69,7 @@ public class JDBCUserDao implements UserDao {
             UserMapper userMapper = new UserMapper();
 
             while (rs.next()) {
-                User user = null;
-                user = userMapper.extractFromResultSet(rs);
+                User user = userMapper.extractFromResultSet(rs);
                 //                user.setCart(cartService.findById(rs.getLong("cart_id")));
                 user = userMapper.makeUnique(users, user);
             }
@@ -89,7 +92,9 @@ public class JDBCUserDao implements UserDao {
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setLong(1, userId);
             ps.execute();
+            LOGGER.info("user deleted");
         } catch (SQLException e) {
+            LOGGER.error("user has not been deleted", e);
             e.printStackTrace();
         }
 
@@ -110,6 +115,7 @@ public class JDBCUserDao implements UserDao {
         User user = users.stream()
                 .filter(x -> email.equals(x.getEmail()))
                 .findAny().orElseThrow(UserNotFoundException::new);
+        LOGGER.info("user has benn founded");
         return user;
 
 
@@ -138,7 +144,9 @@ public class JDBCUserDao implements UserDao {
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setLong(1, userId);
             ps.execute();
+            LOGGER.info("user has been blocked");
         } catch (SQLException e) {
+            LOGGER.error("user has not been blocked", e);
             e.printStackTrace();
         }
     }
@@ -150,7 +158,9 @@ public class JDBCUserDao implements UserDao {
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setLong(1, userId);
             ps.execute();
+            LOGGER.info("user has been unblocked");
         } catch (SQLException e) {
+            LOGGER.error("user has not been unblocked", e);
             e.printStackTrace();
         }
     }

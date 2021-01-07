@@ -1,10 +1,14 @@
 package ua.hubanov.model.dao.impl;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.sql.DataSource;
 
 public class ConnectionPoolHolder {
+    private static final Logger LOGGER = LogManager.getLogger(ConnectionPoolHolder.class);
+
     private static volatile DataSource dataSource;
 
     public static DataSource getDataSource() {
@@ -21,6 +25,7 @@ public class ConnectionPoolHolder {
                     ds.setMaxOpenPreparedStatements(100);
 
                     dataSource = ds;
+                    LOGGER.info("connection pool created");
                 }
             }
         }
