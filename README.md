@@ -37,10 +37,10 @@ Use http://localhost:8081/store to view website
 
 # Default users
 
-ADMIN
-- Email: admin@admin.com
-- Password: 2
+#### ADMIN
+- Email: admin
+- Password: admin
 
-USER
-- Email: user@user.com
-- Password: 1
+#### USER
+- Email: user
+- Password: user
