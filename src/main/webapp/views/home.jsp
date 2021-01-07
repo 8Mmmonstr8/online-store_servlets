@@ -24,6 +24,26 @@
 
 <jsp:include page="blocks/header.jsp"></jsp:include>
 
+<main class="m-3">
+    <div>
+        <label for="categories">Select category </label>
+        <form action="/store/home">
+            <select name="category">
+                <option value="All">All</option>
+                <c:forEach items="${categories}" var="category">
+                    <option value="${category.getId()}">
+                            ${category.getName()}
+                    </option>
+                </c:forEach>
+            </select>
+            <input type="hidden" name="recordsPerPage" value="${recordsPerPage}">
+            <input type="hidden" name="currentPage" value="${currentPage}">
+            <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+        </form>
+    </div>
+</main>
+
+
 <main class="float-none m-3">
     <div class="row col-md-8">
         <table class="table table-striped table-bordered table-sm">
@@ -70,7 +90,8 @@
         <ul class="pagination">
             <c:if test="${currentPage != 1}">
                 <li class="page-item"><a class="page-link"
-                                         href="/store/home?recordsPerPage=${recordsPerPage}&currentPage=${currentPage-1}">Previous</a>
+                                         href="/store/home?recordsPerPage=${recordsPerPage}&currentPage=${currentPage-1}&category=${category}">Previous</a>
+                    <input type="hidden" name="category" value="${category}">
                 </li>
             </c:if>
 
@@ -79,11 +100,13 @@
                     <c:when test="${currentPage eq i}">
                         <li class="page-item active"><a class="page-link">
                                 ${i} <span class="sr-only">(current)</span></a>
+                            <input type="hidden" name="category" value="${category}">
                         </li>
                     </c:when>
                     <c:otherwise>
                         <li class="page-item"><a class="page-link"
-                                                 href="/store/home?recordsPerPage=${recordsPerPage}&currentPage=${i}">${i}</a>
+                                                 href="/store/home?recordsPerPage=${recordsPerPage}&currentPage=${i}&category=${category}">${i}</a>
+                            <input type="hidden" name="category" value="${category}">
                         </li>
                     </c:otherwise>
                 </c:choose>
@@ -91,7 +114,8 @@
 
             <c:if test="${currentPage lt noOfPages}">
                 <li class="page-item"><a class="page-link"
-                                         href="/store/home?recordsPerPage=${recordsPerPage}&currentPage=${currentPage+1}">Next</a>
+                                         href="/store/home?recordsPerPage=${recordsPerPage}&currentPage=${currentPage+1}&category=${category}">Next</a>
+                    <input type="hidden" name="category" value="${category}">
                 </li>
             </c:if>
         </ul>
@@ -119,7 +143,6 @@
 
     </form>
 </main>
-
 
 <jsp:include page="blocks/footer.jsp"></jsp:include>
 

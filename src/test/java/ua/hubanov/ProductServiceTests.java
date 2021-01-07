@@ -68,5 +68,17 @@ public class ProductServiceTests {
     public void getNumberOfRowsTest() {
         int numOfRows = productService.getNumberOfRows();
         System.out.println(numOfRows);
+        System.out.println(15 % 10);
+    }
+
+    @Test
+    public void getNumberOfRowsByCategoryTest() {
+        System.out.println(productService.getNumberOfRowsByCategory(3));
+    }
+
+    @Test
+    public void getAllProductByCategoryWithLimitTest() {
+        List<Product> products = productService.getAllProductsByCategoryIdWithLimit(3, 2, 5);
+        products.forEach(x -> System.out.println(x.getId() + " " + x.getCategory()));
     }
 }

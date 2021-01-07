@@ -115,11 +115,56 @@ public class JDBCProductDao implements ProductDao {
     }
 
     @Override
+    public List<Product> getAllProductByCategoryWithLimit(int categoryId, int currentPage, int recordsPerPage) {
+        List<Product> products = new ArrayList<>();
+        final String query = "SELECT * FROM products INNER JOIN categories " +
+                "ON products.category_id = categories.id " +
+                "WHERE products.category_id = ? ORDER BY products.id LIMIT ?, ?";
+        int start = currentPage * recordsPerPage - recordsPerPage;
+
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, categoryId);
+            ps.setInt(2, start);
+            ps.setInt(3, recordsPerPage);
+            ResultSet rs = ps.executeQuery();
+
+            ProductMapper productMapper = new ProductMapper();
+
+            while (rs.next()) {
+                Product product = productMapper.extractFromResultSet(rs);
+                product.setCategory(categoryMapper.extractFromResultSet(rs));
+                products.add(product);
+            }
+            return products;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
     public int getNumberOfRows() {
         int numOfRows = 0;
         String sql = "SELECT COUNT(ID) FROM products";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            numOfRows = rs.getInt(1);
+            return numOfRows;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return numOfRows;
+        }
+    }
+
+    @Override
+    public int getNumberOfRowsByCategory(int categoryId) {
+        int numOfRows = 0;
+        String sql = "SELECT COUNT(ID) FROM products WHERE category_id = ?";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, categoryId);
             ResultSet rs = ps.executeQuery();
             rs.next();
             numOfRows = rs.getInt(1);

@@ -14,4 +14,8 @@ public interface ProductDao extends GenericDao<Product> {
     List<Product> getAllProductWithLimit(int currentPage, int recordsPerPage);
 
     int getNumberOfRows();
+
+    List<Product> getAllProductByCategoryWithLimit(int catId, int currentPage, int recordsPerPage);
+
+    int getNumberOfRowsByCategory(int categoryId);
 }

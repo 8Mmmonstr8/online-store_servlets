@@ -64,4 +64,16 @@ public class ProductService {
             return dao.getNumberOfRows();
         }
     }
+
+    public List<Product> getAllProductsByCategoryIdWithLimit(int catId, int currentPage, int recordsPerPage) {
+        try (ProductDao dao = daoFactory.createProductDao()) {
+            return dao.getAllProductByCategoryWithLimit(catId, currentPage, recordsPerPage);
+        }
+    }
+
+    public int getNumberOfRowsByCategory(int categoryId) {
+        try (ProductDao dao = daoFactory.createProductDao()) {
+            return dao.getNumberOfRowsByCategory(categoryId);
+        }
+    }
 }
