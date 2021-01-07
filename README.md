@@ -39,8 +39,10 @@ Use http://localhost:8081/store to view website
 
 ### ADMIN
 email: admin@admin.com
+
 password: 2
 
 ### USER
 email: user@user.com
+
 password: 1
